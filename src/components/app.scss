@@ -1,0 +1,34 @@
+
+$background-color: rgb(240,240,240);
+
+body {
+  margin: 0;
+
+  #root {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background-color: $background-color;
+    width: 100%;
+    height: 100%;
+
+    @media screen and ( max-width: 350px ) {      
+      overflow-x: auto;
+      justify-content: flex-start;
+    }
+  }
+
+  #store {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    @media screen and ( max-width: 261px ) {      
+      justify-content: flex-start;
+    }
+  }
+}
