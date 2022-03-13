@@ -2,10 +2,14 @@
 import ReactDOM from 'react-dom';
 import App from './components/app';
 
+// find the root element and begin app there.
 const root = document.getElementById('root');
 if( root ) {
+  const page = root.className;
+
   ReactDOM.render(
-    <App />,
+    <App page={ page } />,
     root
   );
+  
 }

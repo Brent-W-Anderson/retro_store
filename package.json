@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "reset": "rm -rf dist & mkdir dist",
+    "reset": "rm -rf dist",
     "bundle": "webpack",
-    "start": "yarn bundle --watch",
-    "dev": "yarn start | webpack serve"
+    "url": "start http://projects/retro_store/dist/",
+    "start": "yarn url | yarn bundle --watch"
   },
   "author": "",
   "license": "ISC",
@@ -22,12 +22,10 @@
     "copy-webpack-plugin": "^10.2.1",
     "devtools-detect": "^4.0.0",
     "node": "^17.7.1",
-    "nodemon-webpack-plugin": "^4.7.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.4",
-    "ts-loader": "^9.2.6",
-    "webpack-dev-server": "^4.7.4"
+    "ts-loader": "^9.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

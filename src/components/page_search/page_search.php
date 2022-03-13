@@ -1,15 +1,15 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="./icon.png">
-    <title>retro store</title>
+    <title>retro store - search</title>
   </head>
 
   <body>
-    <div id="root"></div>
-    
-    <script src="./bundle.js"></script>
+    <div id='root' class='page_search'></div>
+    <script src='./bundle.js'></script>
   </body>
 </html>

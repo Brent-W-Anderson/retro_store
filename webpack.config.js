@@ -20,29 +20,17 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/index.html' },
-        { from: './src/components/assets' }
+        { from: './src/components/page_home/index.php' },
+        { from: './src/components/page_search/page_search.php' },
+        { from: './src/components/_assets' }
       ]
     })
   ],
 
-  // devserver
-  devServer: {
-    port: 5471,
-    static: {
-      directory: path.join( __dirname, "dist" ),
-      watch: true
-    },
-    devMiddleware: {
-      publicPath: "http://projects/retro_store/"
-    },
-    open: true
-  },
-
   // loaders
   module: {
     rules: [
-      { test: /\.html$/i, loader: 'html-loader', exclude: [ /node_modules/, require.resolve( './src/index.html' ) ] },
+      { test: /\.html$/i, loader: 'html-loader' },
       { test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader' },
       { test: /\.tsx?$/, loader: 'ts-loader' },
       {
