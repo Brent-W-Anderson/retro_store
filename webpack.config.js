@@ -1,6 +1,5 @@
 
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -13,7 +12,8 @@ module.exports = {
   // output
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
 
   // plugins
@@ -28,16 +28,21 @@ module.exports = {
 
   // devserver
   devServer: {
-    host: 'localhost',
-    port: 8989,
-    contentBase: 'dist',
-    open: true,
+    port: 5471,
+    static: {
+      directory: path.join( __dirname, "dist" ),
+      watch: true
+    },
+    devMiddleware: {
+      publicPath: "http://projects/retro_store/"
+    },
+    open: true
   },
 
   // loaders
   module: {
     rules: [
-      { test: /\.html$/i, loader: 'html-loader' },
+      { test: /\.html$/i, loader: 'html-loader', exclude: [ /node_modules/, require.resolve( './src/index.html' ) ] },
       { test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader' },
       { test: /\.tsx?$/, loader: 'ts-loader' },
       {
@@ -56,12 +61,5 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
-  },
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-      })
-    ],
-  },
+  }
 };
