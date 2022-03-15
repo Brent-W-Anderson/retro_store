@@ -2,6 +2,7 @@
 import { Component } from 'react';
 
 // components
+import Header from './header/header';
 import HomePage from './page_home/page_home';
 import SearchPage from './page_search/page_search';
 
@@ -16,6 +17,7 @@ export default class App extends Component<{ page:string }> {
       case 'page_home': {
         return (
           <div className='app'>
+            <Header />
             <HomePage />
           </div>
         )
@@ -24,6 +26,7 @@ export default class App extends Component<{ page:string }> {
       case 'page_search': {
         return (
           <div className='app'>
+            <Header />
             <SearchPage />
           </div>
         )

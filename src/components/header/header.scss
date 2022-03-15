@@ -1,0 +1,20 @@
+
+// header styles go here..
+.links {
+    display: flex;
+    justify-content: center;
+    color: $color_header_link;
+    background: $color_container_background;
+
+    .link {
+        cursor: pointer;
+        user-select: none;
+        list-style: none;
+        padding: 10px;
+        margin: 0 10px;
+
+        &:active {
+            color: darken( $color_header_link, 10% );
+        }
+    }
+}

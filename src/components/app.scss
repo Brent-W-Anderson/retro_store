@@ -12,7 +12,28 @@ body {
     background: $color_background;
 
     .app {
-      // pages
+      // reset browser altered DOM elements
+      h1, h2, h3, h4, h5, h6, ul, ol, p {
+        margin: 0;
+        padding: 0;
+      }
+
+      // header
+      @import "./header/header";
+
+      // page defaults:
+      .page {
+        h2 {
+          text-align: center;
+          margin: 10px 0;
+        }
+    
+        a {
+          position: absolute;
+          padding: 10px 20px;
+        }
+      }
+
       @import "./page_home/page_home";
       @import "./page_search/page_search";
     }
