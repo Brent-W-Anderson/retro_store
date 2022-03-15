@@ -11,5 +11,4 @@ if( root ) {
     <App page={ page } />,
     root
   );
-  
 }

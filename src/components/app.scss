@@ -25,12 +25,19 @@ body {
       .page {
         h2 {
           text-align: center;
+          color: $color_text;
           margin: 10px 0;
         }
     
         a {
           position: absolute;
-          padding: 10px 20px;
+          text-decoration: none;
+          color: $color_text;
+          margin: 10px 20px;
+
+          &:active {
+            color: lighten( $color_text, 25% );
+          }
         }
       }
 
