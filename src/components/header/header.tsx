@@ -16,11 +16,11 @@ export default class Header extends Component<{ page:string }> {
         </div>
 
         <ul className='links'>
-            <li className='link'>
+            <li className={`link${ activeLink === 'home' ? ' selected' : '' }`}>
               <a href={activeLink === 'home' ? '#' : `./index.php`}> Home </a>
             </li>
 
-            <li className='link'>
+            <li className={`link${ activeLink === 'search' ? ' selected' : '' }`}>
               <a href={activeLink === 'search' ? '#' : `./page_search.php`}> Search </a>
             </li>
 

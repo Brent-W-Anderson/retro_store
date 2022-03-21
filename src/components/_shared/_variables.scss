@@ -1,5 +1,9 @@
 
+// background:
 $color_background: rgb(240,240,240);
-$color_text: #333;
-$color_header_link: rgb(240,240,240);
+$color_header_link: $color_background;
+$color_selected_link_underline: $color_background;
+
+// foreground:
 $color_container_background: #333;
+$color_text: $color_container_background;

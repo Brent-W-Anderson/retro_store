@@ -32,7 +32,6 @@
 
                 &[ href="#" ] {
                     cursor: default;
-                    color: darken( $color_header_link, 20% );
                 }
 
                 @include breakpoint_min( $large_screen ) {
@@ -46,6 +45,16 @@
 
                 a {
                     cursor: not-allowed;
+                    color: darken( $color_header_link, 50% );
+                }
+            }
+
+            &.selected a { // show selected page with it underlined..
+                border-bottom: 2px solid $color_selected_link_underline;
+                padding: 3px 10px;
+
+                &:active {
+                    color: inherit;
                 }
             }
         }
