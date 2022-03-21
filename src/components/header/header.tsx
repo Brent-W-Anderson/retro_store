@@ -3,10 +3,13 @@ import { Component } from 'react';
 
 // the header needs to know which page it's on, so it knows which links to display.
 export default class Header extends Component<{ page:string }> {
-  render() {
-    const { page } = this.props;
-    let activeLink = page.toLowerCase().replace( 'page_', '' );
+  state = {
+    activeLink: this.props.page.toLocaleLowerCase().replace( 'page_', '' )
+  }
 
+  render() {
+    const { activeLink } = this.state;
+    
     return (
       <div id='header'>
         <div className='accent'>
