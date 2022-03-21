@@ -17,7 +17,7 @@ export default class App extends Component<{ page:string }> {
       case 'page_home': {
         return (
           <div className='app'>
-            <Header />
+            <Header page={ page } />
             <HomePage />
           </div>
         )
@@ -26,7 +26,7 @@ export default class App extends Component<{ page:string }> {
       case 'page_search': {
         return (
           <div className='app'>
-            <Header />
+            <Header page={ page } />
             <SearchPage />
           </div>
         )

@@ -1,7 +1,8 @@
 
 @import "./_shared/variables";
+@import "./_shared/breakpoints";
 
-// put global styles here..
+// put global styles and imports here..
 body {
   margin: 0;
 
@@ -17,7 +18,7 @@ body {
         padding: 0;
       }
 
-      // header
+      // header:
       @import "./header/header";
 
       // page defaults:
@@ -26,23 +27,16 @@ body {
         width: 100%;
 
         h2 {
+          position: absolute;
           text-align: center;
           color: $color_text;
+          width: 100%;
           margin: 10px 0;
-        }
-    
-        a {
-          position: absolute;
-          text-decoration: none;
-          color: $color_text;
-          margin: 10px 20px;
-
-          &:active {
-            color: lighten( $color_text, 25% );
-          }
+          z-index: -1;
         }
       }
 
+      // page specific styles:
       @import "./page_home/page_home";
       @import "./page_search/page_search";
     }

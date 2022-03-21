@@ -1,20 +1,98 @@
 
 // header styles go here..
-.links {
-    display: flex;
-    justify-content: center;
-    color: $color_header_link;
+#header {
     background: $color_container_background;
 
-    .link {
-        cursor: pointer;
-        user-select: none;
-        list-style: none;
-        padding: 10px;
-        margin: 0 10px;
+    .links {
+        display: flex;
+        margin: auto;
+        width: 60vw;
+        color: $color_header_link;
 
-        &:active {
-            color: darken( $color_header_link, 10% );
+        @include breakpoint_max( $small_screen ) {
+            width: 100vw;
+        }
+    
+        .link {
+            user-select: none;
+            list-style: none;
+            text-align: center;
+            width: -webkit-fill-available;
+            padding: 10px;
+            margin: 0 10px;
+
+            a {
+                cursor: pointer;
+                text-decoration: none;
+                color: $color_header_link;
+      
+                &:active {
+                    color: darken( $color_header_link, 10% );
+                }
+
+                &[ href="#" ] {
+                    cursor: default;
+                    color: darken( $color_header_link, 20% );
+                }
+
+                @include breakpoint_min( $large_screen ) {
+                    font-size: 150%;
+                    line-height: 38px;
+                }
+            }
+
+            &.inactive {
+                text-decoration: line-through;
+
+                a {
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+
+    .accent {
+        position: absolute;
+        width: 20vw;
+        height: 20px;
+        bottom: -20px;
+        border-radius: 0 0 10px 0;
+        background: $color_container_background;
+
+        .background {
+            position: absolute;
+            right: -20px;
+            height: 20px;
+            width: 20px;
+            background: $color_container_background;
+
+            .curve {
+                border-radius: 50% 0 0 0;
+                width: 100%;
+                height: 100%;
+                background: $color_background;
+            }
+        }
+
+        &.right {
+            right: 0;
+            border-radius: 0 0 0 10px;
+
+            .background {
+                left: -20px;
+
+                .curve {
+                    border-radius: 0 50% 0 0;
+                }
+            }
+        }
+
+        @include breakpoint_max( $small_screen ) {
+            display: none;
+        }
+
+        @include breakpoint_min( $large_screen ) {
+            display: none;
         }
     }
 }
