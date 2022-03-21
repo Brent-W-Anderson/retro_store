@@ -44,8 +44,8 @@ body {
       }
 
       // page specific styles:
-      @import "./page_home/page_home";
-      @import "./page_search/page_search";
+      @import "./pages/home/home";
+      @import "./pages/search/search";
     }
   }
 }

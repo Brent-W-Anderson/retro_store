@@ -20,8 +20,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/components/page_home/index.php' },
-        { from: './src/components/page_search/page_search.php' },
+        { from: './src/components/pages/home/index.php' },
+        { from: './src/components/pages/search/search.php' },
         { from: './src/components/_assets' }
       ]
     })

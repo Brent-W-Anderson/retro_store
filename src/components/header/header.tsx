@@ -4,7 +4,7 @@ import { Component } from 'react';
 // the header needs to know which page it's on, so it knows which links to display.
 export default class Header extends Component<{ page:string }> {
   state = {
-    activeLink: this.props.page.toLowerCase().replace( 'page_', '' )
+    activeLink: this.props.page.toLowerCase()
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class Header extends Component<{ page:string }> {
             </li>
 
             <li className={`link${ activeLink === 'search' ? ' selected' : '' }`}>
-              <a href={activeLink === 'search' ? '#' : `./page_search.php`}> Search </a>
+              <a href={activeLink === 'search' ? '#' : `./search.php`}> Search </a>
             </li>
 
             <li className='link inactive'>

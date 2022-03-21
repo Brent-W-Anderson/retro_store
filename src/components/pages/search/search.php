@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div id='root' class='page_search'></div>
+    <div id='root' class='search'></div>
     <script src='./bundle.js'></script>
   </body>
 </html>

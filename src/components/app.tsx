@@ -3,8 +3,8 @@ import { Component } from 'react';
 
 // components
 import Header from './header/header';
-import HomePage from './page_home/page_home';
-import SearchPage from './page_search/page_search';
+import HomePage from './pages/home/home';
+import SearchPage from './pages/search/search';
 
 // styling
 import './app.scss';
@@ -14,7 +14,7 @@ export default class App extends Component<{ page:string }> {
     const { page } = this.props;
 
     switch( page ) {
-      case 'page_home': {
+      case 'home': {
         return (
           <div className='app'>
             <Header page={ page } />
@@ -26,7 +26,7 @@ export default class App extends Component<{ page:string }> {
         )
       }
 
-      case 'page_search': {
+      case 'search': {
         return (
           <div className='app'>
             <Header page={ page } />
