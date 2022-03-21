@@ -22,17 +22,25 @@ body {
       @import "./header/header";
 
       // page defaults:
-      .page {
+      .pages {
         position: absolute;
-        width: 100%;
+        width: 100vw;
 
-        h2 {
-          position: absolute;
-          text-align: center;
-          color: $color_text;
-          width: 100%;
-          margin: 10px 0;
-          z-index: -1;
+        .page {
+          margin: auto;
+          box-sizing: border-box;
+          width: 60vw;
+          padding: 10px;
+
+          @include breakpoint_max( $small_screen ) {
+            width: 100vw;
+          }
+  
+          h2 {
+            text-align: center;
+            color: $color_text;
+            z-index: -1;
+          }
         }
       }
 

@@ -18,7 +18,10 @@ export default class App extends Component<{ page:string }> {
         return (
           <div className='app'>
             <Header page={ page } />
-            <HomePage />
+
+            <div className='pages'>
+              <HomePage />
+            </div>
           </div>
         )
       }
@@ -27,7 +30,10 @@ export default class App extends Component<{ page:string }> {
         return (
           <div className='app'>
             <Header page={ page } />
-            <SearchPage />
+
+            <div className='pages'>
+              <SearchPage />
+            </div>
           </div>
         )
       }
