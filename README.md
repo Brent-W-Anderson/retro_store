@@ -10,6 +10,6 @@
   ### ```yarn reset``` will reset the dist directory contents to empty.
   ### ```yarn bundle``` will bundle a distributable version of the app into the dist directory.
   ### ```yarn url``` will open the browser at this specified location.
-  ### ```yarn start``` will open the browser at the projects directory (the app assumes a virtual host has been setup for this location).
+  ### ```yarn start``` will open the browser at the specified *url* (the app assumes a virtual host has been setup for this location). A bundle will also be created (on this script specifically, webpack will watch for any saved changes but a browser refresh will need to be done manually to see those changes).
 
   ### ** run wamp/xxamp from your dist directory by changing the *_url_ script to whatever location the server is running your projects from.* **
