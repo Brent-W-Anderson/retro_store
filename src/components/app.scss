@@ -6,8 +6,9 @@
 body {
   margin: 0;
   background-position: top;
+  overflow: hidden;
   background-image: url(./_assets/RetroBackground.png);
-  
+
   #root {
     position: absolute;
     width: 100%;
@@ -26,13 +27,19 @@ body {
       // page defaults:
       .pages {
         position: absolute;
-        width: 100%;
+        overflow-y: scroll;
+        top: 38px; // shift the distance of the headers height.
+        left: -17px; // shift for scrollbar and calculate width, so we don't lose ratio.
+        width: calc( 100% + 17px ); // account for scrollbar
+        height: calc( 100vh - 38px ); // subtract header height
 
         .page {
+          position: relative;
           margin: auto;
           box-sizing: border-box;
+          left: 17px; // push back to center
           width: 60%;
-          padding: 10px;
+          padding: 20px; // need at least 20px here because we're hiding the header curve when we scroll anything up past it
 
           @include breakpoint_max( $small_screen ) {
             width: 100vw;
@@ -41,7 +48,25 @@ body {
           h2 {
             text-align: center;
             color: $color_text;
+            text-shadow: 
+              1px 1px 1px $color_container_background,
+              -1px -1px 1px $color_container_background,
+              1px -1px 1px $color_container_background,
+              -1px 1px 1px $color_container_background;
           }
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+        }
+        
+        &::-webkit-scrollbar {
+          width: 17px; // this is usually the default size.
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+          background-color: $color_neon;
         }
       }
 

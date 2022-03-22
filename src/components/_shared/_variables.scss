@@ -1,8 +1,10 @@
 
+$color_neon: #47FFFF;
+
 // background:
 $color_background: rgb(30, 0, 55);
 $color_header_link: rgb(240,240,240);
-$color_selected_link_underline: $color_header_link;
+$color_selected_link_underline: $color_neon;
 
 // foreground:
 $color_container_background: #333;
