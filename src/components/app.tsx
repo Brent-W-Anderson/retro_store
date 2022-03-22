@@ -18,13 +18,13 @@ export default class App extends Component<{ page:string }> {
     pageNum: 1 // change this to see a different page with more games or something else..
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { pageNum } = this.state;
     const { page } = this.props;
 
     if( page === 'home' ) {
       this.setState({
-        games: RAWG( 'games', pageNum ) // search API TODO: move this to a more specific location that we need it within the components.
+        games: await RAWG( 'games', pageNum ) // search API TODO: move this to a more specific location that we need it within the components.
       })
     }
   }
