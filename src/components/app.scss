@@ -28,6 +28,7 @@ body {
       .pages {
         position: absolute;
         overflow-y: scroll;
+        overflow-x: hidden;
         top: 38px; // shift the distance of the headers height.
         left: -17px; // shift for scrollbar and calculate width, so we don't lose ratio.
         width: calc( 100% + 17px ); // account for scrollbar
