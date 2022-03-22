@@ -1,6 +1,7 @@
 
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   target: 'web',
@@ -24,7 +25,8 @@ module.exports = {
         { from: './src/components/pages/search/search.php' },
         { from: './src/components/_assets' }
       ]
-    })
+    }),
+    new Dotenv()
   ],
 
   // loaders

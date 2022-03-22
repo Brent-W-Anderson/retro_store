@@ -26,12 +26,12 @@ body {
       // page defaults:
       .pages {
         position: absolute;
-        width: 100vw;
+        width: 100%;
 
         .page {
           margin: auto;
           box-sizing: border-box;
-          width: 60vw;
+          width: 60%;
           padding: 10px;
 
           @include breakpoint_max( $small_screen ) {

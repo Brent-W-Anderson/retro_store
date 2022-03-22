@@ -13,3 +13,6 @@
   ### ```yarn start``` will open the browser at the specified *url* (the app assumes a virtual host has been setup for this location). A bundle will also be created (on this script specifically, webpack will watch for any saved changes but a browser refresh will need to be done manually to see those changes).
 
   ### ** run wamp/xxamp from your dist directory by changing the *_url_ script to whatever location the server is running your projects from.* **
+
+  ## RAWG API:
+  ### create your own api key here: [1]:https://rawg.io/apidocs and create an _.env_ file at the root of the project. add ```RAWG_API_KEY=<api_key_value_here_without_quotes>```

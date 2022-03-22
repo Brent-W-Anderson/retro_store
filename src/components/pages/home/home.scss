@@ -1,6 +1,11 @@
 
 
 #home {
-    // homepage specific styles here.
+    .game {
+        img {
+            float: left; // gets rid of some default spacing added to the images.
+            max-width: 100%;
+        }
+    }
 }
 
