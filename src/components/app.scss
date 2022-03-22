@@ -5,7 +5,9 @@
 // put global styles and imports here..
 body {
   margin: 0;
+  background-position: top;
   background-image: url(./_assets/RetroBackground.png);
+  
   #root {
     position: absolute;
     width: 100%;
