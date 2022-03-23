@@ -40,9 +40,14 @@ body {
           box-sizing: border-box;
           left: 17px; // push back to center
           width: 60%;
-          padding: 20px; // need at least 20px here because we're hiding the header curve when we scroll anything up past it
+          padding: 20px; // need at least 20px left-t0-right here because we're hiding the header curve when we scroll anything up past it
+          padding-top: 40px;
 
           @include breakpoint_max( $small_screen ) {
+            width: 100vw;
+          }
+
+          @include breakpoint_min( $large_screen ) {
             width: 100vw;
           }
   

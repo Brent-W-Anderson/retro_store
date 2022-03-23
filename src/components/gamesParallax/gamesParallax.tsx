@@ -19,15 +19,16 @@ export default class HomePage extends Component<{ game:{ id:number, background_i
     const { game, offsetY } = this.props;
 
     const x = game.id % 9;
-    const y = game.id % 40;
+    let y = game.id % 10;
     let position = 'top';
 
-    if( y < 20 ) {
+    if( y < 5 ) {
       position = 'top';
     }
     else {
       position = 'bottom';
     }
+    y*= 1;
     
     switch( x ) {
       case 0: 
@@ -40,11 +41,11 @@ export default class HomePage extends Component<{ game:{ id:number, background_i
                 onMouseLeave={ this.releaseZoom }
                 style={{
                     transform: `translateY(${ offsetY * 0.45 }px) scale(${ 0.7 + zoom })`,
-                    top: position === 'top' ? y + 'px' : -y + 'px',
-                    left: position === 'top' ? -y + 'px' : y + 'px', // reverse for left-to-right
+                    top: position === 'top' ? y + 'vh' : -y/y + 'vh',
+                    left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
                     transition: `${ zoom  }s`
                 }}
-            > <img key={ game.id } src={ game.background_image } />
+            > <img key={ game.id } src={ game.background_image } style={{ opacity: '0.95' }} />
             </div>
         );
       }
@@ -59,11 +60,11 @@ export default class HomePage extends Component<{ game:{ id:number, background_i
                 onMouseLeave={ this.releaseZoom }
                 style={{
                     transform: `translateY(${ offsetY * 0.5 }px) scale(${ 1.0 + zoom })`,
-                    top: position === 'top' ? y + 'px' : -y + 'px',
-                    left: position === 'top' ? -y + 'px' : y + 'px', // reverse for left-to-right
+                    top: position === 'top' ? y + 'vh' : -y/y + 'vh',
+                    left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
                     transition: `${ zoom  }s`
                 }}
-            > <img key={ game.id } src={ game.background_image } />
+            > <img key={ game.id } src={ game.background_image } style={{ opacity: '0.9' }} />
             </div>
         );
       }
@@ -78,11 +79,11 @@ export default class HomePage extends Component<{ game:{ id:number, background_i
                 onMouseLeave={ this.releaseZoom }
                 style={{
                     transform: `translateY(${ offsetY * 0.55 }px) scale(${ 1.3 + zoom })`,
-                    top: position === 'top' ? y + 'px' : -y + 'px',
-                    left: position === 'top' ? -y + 'px' : y + 'px', // reverse for left-to-right
+                    top: position === 'top' ? y + 'vh' : -y/y + 'vh',
+                    left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
                     transition: `${ zoom  }s`
                 }}
-            > <img key={ game.id } src={ game.background_image } />
+            > <img key={ game.id } src={ game.background_image } style={{ opacity: '0.85' }} />
             </div>
         );
       }
