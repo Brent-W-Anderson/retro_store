@@ -21,11 +21,11 @@ export default class HomePage extends Component<{ games:{}[], offsetY:number }> 
         return (
           <div 
             key={ game.id } 
-            className='game'
+            className='game zero'
             style={{
               transform: `translateY(${ offsetY * 0.45 }px)`,
               top: position === 'top' ? y + 'px' : -y + 'px',
-              zIndex: '1'
+              left: position === 'top' ? -y + 'px' : y + 'px' // reverse for left-to-right
             }}
           >
             <img 
@@ -43,11 +43,11 @@ export default class HomePage extends Component<{ games:{}[], offsetY:number }> 
         return (
           <div 
             key={ game.id } 
-            className='game'
+            className='game one'
             style={{
               transform: `translateY(${ offsetY * 0.5 }px)`,
               top: position === 'top' ? y + 'px' : -y + 'px',
-              zIndex: '2'
+              left: position === 'top' ? -y + 'px' : y + 'px' // reverse for left-to-right
             }}
           >
             <img 
@@ -65,11 +65,11 @@ export default class HomePage extends Component<{ games:{}[], offsetY:number }> 
         return (
           <div 
             key={ game.id } 
-            className='game'
+            className='game two'
             style={{
               transform: `translateY(${ offsetY * 0.55 }px)`,
               top: position === 'top' ? y + 'px' : -y + 'px',
-              zIndex: '3'
+              left: position === 'top' ? -y + 'px' : y + 'px' // reverse for left-to-right
             }}
           >
             <img 
