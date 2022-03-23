@@ -15,30 +15,39 @@ import './app.scss';
 export default class App extends Component<{ page:string }> {
   state = {
     games: [],
-    pageNum: 1 // change this to see a different page with more games or something else..
+    pageNum: 1, // change this to see a different page with more games or something else..
+    offsetY: 0
+  }
+
+  handleMouseOffset = ( e:React.UIEvent<HTMLElement> ) => {
+    this.setState({
+      offsetY: e.currentTarget.scrollTop
+    });
   }
 
   async componentDidMount() {
     const { pageNum } = this.state;
     const { page } = this.props;
 
+    const x = Math.floor( Math.random() * 10 );
+
     if( page === 'home' ) {
       this.setState({
-        games: await RAWG( 'games', pageNum ) // search API TODO: move this to a more specific location that we need it within the components.
+        games: await RAWG( 'games', x ) // search API TODO: move this to a more specific location that we need it within the components.
       })
     }
   }
 
   render() {
     const { page } = this.props;
-    const { games } = this.state;
+    const { games, offsetY } = this.state;
 
     return (
       <div className='app'>
         <Header page={ page } />
 
-        <div className='pages'>
-          { page === 'home' ? <HomePage games={ games } /> : null }
+        <div className='pages' onScroll={ this.handleMouseOffset }>
+          { page === 'home' ? <HomePage games={ games } offsetY={ offsetY } /> : null }
           { page === 'search' ? <SearchPage /> : null }
         </div>
       </div>
