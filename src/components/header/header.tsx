@@ -12,11 +12,7 @@ export default class Header extends Component<{ page:string }> {
 
     return (
       <div id='header'>
-        <div className='accent'>
-          <div className='background'>
-            <div className='curve' />
-          </div>
-        </div>
+        <div className='accent' />
 
         <ul className='links'>
             <li className={`link${ activeLink === 'home' ? ' selected' : '' }`}>
@@ -36,11 +32,7 @@ export default class Header extends Component<{ page:string }> {
             </li>
         </ul>
 
-        <div className='accent right'>
-          <div className='background'>
-            <div className='curve' />
-          </div>
-        </div>
+        <div className='accent right' />
       </div>
     );
   }

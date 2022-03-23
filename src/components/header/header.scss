@@ -2,19 +2,27 @@
 // header styles go here..
 #header {
     position: fixed;
-    background: $color_container_background;
-    border-bottom: 2px solid $color_neon;
+    background: $header_background;
     width: 100vw;
     z-index: 10;
+
+    @include breakpoint_min( $large_screen ) {
+        border-bottom: 2px solid $app_accent;
+    }
 
     .links {
         display: flex;
         margin: auto;
         width: 60vw;
-        color: $color_header_link;
+        color: $header_link;
+        border-bottom: 2px solid $app_accent;
 
         @include breakpoint_max( $small_screen ) {
             width: 100vw;
+        }
+
+        @include breakpoint_min( $large_screen ) {
+            border-bottom: none;
         }
     
         .link {
@@ -28,10 +36,10 @@
             a {
                 cursor: pointer;
                 text-decoration: none;
-                color: $color_header_link;
+                color: $header_link;
       
                 &:active {
-                    color: darken( $color_header_link, 10% );
+                    color: darken( $header_link, 10% );
                 }
 
                 &[ href="#" ] {
@@ -49,12 +57,13 @@
 
                 a {
                     cursor: not-allowed;
-                    color: darken( $color_header_link, 50% );
+                    color: darken( $header_link, 50% );
                 }
             }
 
             &.selected a { // show selected page with it underlined..
-                border-bottom: 2px solid $color_selected_link_underline;
+                color: $selected_link_text;
+                border-bottom: 2px solid $selected_link_underline;
                 padding: 3px 10px;
 
                 &:active {
@@ -71,40 +80,16 @@
         height: 20px;
         bottom: -20px;
         border-radius: 0 0 10px 0;
-        border-bottom: 2px solid $color_neon;
-        border-right: 2px solid $color_neon;
-        background: $color_container_background;
-
-        .background {
-            position: absolute;
-            right: -20px;
-            height: 20px;
-            width: 20px;
-            background: $color_container_background;
-
-            .curve {
-                border-radius: 50% 0 0 0;
-                width: 100%;
-                height: 100%;
-                background: $color_background;
-                border-top: 2px solid $color_neon;
-            }
-        }
+        border-bottom: 2px solid $app_accent;
+        border-right: 2px solid $app_accent;
+        background: $header_background;
 
         &.right {
             right: 0;
             border-radius: 0 0 0 10px;
             border-right: unset;
-            border-bottom: 2px solid $color_neon;
-            border-left: 2px solid $color_neon;
-
-            .background {
-                left: -20px;
-
-                .curve {
-                    border-radius: 0 50% 0 0;
-                }
-            }
+            border-bottom: 2px solid $app_accent;
+            border-left: 2px solid $app_accent;
         }
 
         @include breakpoint_max( $small_screen ) {

@@ -28,7 +28,7 @@ export default class HomePage extends Component<{ game:{ id:number, background_i
     else {
       position = 'bottom';
     }
-    y*= 1;
+    y*= 1; // ratio for offsets ( increase this to make tiles more sporadic )
     
     switch( x ) {
       case 0: 
