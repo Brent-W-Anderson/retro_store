@@ -10,8 +10,11 @@
         .game {
             cursor: pointer;
             position: relative;
+            width: fit-content;
+            height: 100%;
 
             img {
+                float: left; // fit-content on the vertical
                 height: 12vw;
             }
 

@@ -1,96 +1,28 @@
 
 import { Component } from 'react';
 
-export default class HomePage extends Component<{ games:{}[], offsetY:number }> {
-  handleGames = ( game:any ) => {
-    const { offsetY } = this.props;
-    const x = game.id % 3;
-    const y = game.id % 40;
-    let position = 'top';
+// components
+import GamesParallax from '../../gamesParallax/gamesParallax';
 
-    if( y < 20 ) {
-      position = 'top';
-    }
-    else {
-      position = 'bottom';
-    }
-    
+// API
+import RAWG from '../../RAWG/RAWG';
 
-    switch( x ) {
-      case 0: { // background, so this needs to scroll slower and make the image smaller
-        return (
-          <div 
-            key={ game.id } 
-            className='game zero'
-            style={{
-              transform: `translateY(${ offsetY * 0.45 }px)`,
-              top: position === 'top' ? y + 'px' : -y + 'px',
-              left: position === 'top' ? -y + 'px' : y + 'px' // reverse for left-to-right
-            }}
-          >
-            <img 
-              key={ game.id } 
-              src={ game.background_image }
-              style={{
-                transform: `scale( .7 )`
-              }}
-            />
-          </div>
-        );
-      }
+export default class HomePage extends Component<{ offsetY:number }> {
+  state = {
+    games: []
+  }
 
-      case 1: { // center, so this can be normal
-        return (
-          <div 
-            key={ game.id } 
-            className='game one'
-            style={{
-              transform: `translateY(${ offsetY * 0.5 }px)`,
-              top: position === 'top' ? y + 'px' : -y + 'px',
-              left: position === 'top' ? -y + 'px' : y + 'px' // reverse for left-to-right
-            }}
-          >
-            <img 
-              key={ game.id } 
-              src={ game.background_image }
-              style={{
-                transform: `scale( 1 )`
-              }}
-            />
-          </div>
-        );
-      }
+  async componentDidMount() {
+    const pageNum = Math.floor( Math.random() * 10 );
 
-      case 2: { // we'll make this the foreground, so let's speed it up and make the image bigger
-        return (
-          <div 
-            key={ game.id } 
-            className='game two'
-            style={{
-              transform: `translateY(${ offsetY * 0.55 }px)`,
-              top: position === 'top' ? y + 'px' : -y + 'px',
-              left: position === 'top' ? -y + 'px' : y + 'px' // reverse for left-to-right
-            }}
-          >
-            <img 
-              key={ game.id } 
-              src={ game.background_image }
-              style={{
-                transform: `scale( 1.3 )`
-              }}
-            />
-          </div>
-        );
-      }
-
-      default: {
-        console.error( 'no game components loaded..' );
-      }
-    }
+    this.setState({
+      games: await RAWG( 'games', pageNum ) // fetch some games from our RAWG API
+    })
   }
 
   render() {
-    const { games } = this.props;
+    const { games } = this.state;
+    const { offsetY } = this.props;
 
     return (
       <div id='home' className="page">
@@ -101,7 +33,15 @@ export default class HomePage extends Component<{ games:{}[], offsetY:number }> 
         </div>
 
         <div className='games'>
-          { games.map( this.handleGames ) }
+          { games.map( ( game: { id:number, background_image:string } ) => { 
+            return (
+              <GamesParallax 
+                key={ game.id } 
+                game={ game } 
+                offsetY={ offsetY } 
+              />
+            );
+          } ) }
         </div>
       </div>
     );
