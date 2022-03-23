@@ -14,7 +14,7 @@ export default class App extends Component<{ page:string }> {
     offsetY: 0
   }
 
-  handleMouseOffset = ( e:React.UIEvent<HTMLElement> ) => {
+  handleScrollOffset = ( e:React.UIEvent<HTMLElement> ) => {
     this.setState({
       offsetY: e.currentTarget.scrollTop
     });
@@ -28,7 +28,7 @@ export default class App extends Component<{ page:string }> {
       <div className='app'>
         <Header page={ page } />
 
-        <div className='pages' onScroll={ this.handleMouseOffset }>
+        <div className='pages' onScroll={ this.handleScrollOffset }>
           { page === 'home' ? <HomePage offsetY={ offsetY } /> : null }
           { page === 'search' ? <SearchPage /> : null }
         </div>
