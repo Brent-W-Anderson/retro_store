@@ -1,7 +1,7 @@
 
 import { Component } from 'react';
 
-export default class HomePage extends Component {
+export default class SearchPage extends Component {
   render() {
     return (
       <div id='search' className="page">

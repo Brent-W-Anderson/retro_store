@@ -1,7 +1,7 @@
 
 import { Component } from 'react';
 
-export default class HomePage extends Component<{ game:{ id:number, background_image:string }, offsetY:number }> {
+export default class GamesParallax extends Component<{ game:{ id:number, background_image:string }, offsetY:number }> {
   state = {
     zoom: 0
   }
