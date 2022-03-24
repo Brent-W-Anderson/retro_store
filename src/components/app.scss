@@ -17,6 +17,7 @@ body {
       // reset browser altered DOM elements
       h1, h2, h3, h4, h5, h6, ul, ol, p {
         text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
         margin: 0;
         padding: 0;
         color: $text;
@@ -27,6 +28,10 @@ body {
           -1px 1px 1px $text_shadow;
       }
 
+      h1, h2 {
+        letter-spacing: 2px;
+      }
+
       // header:
       @import "./header/header";
 
@@ -35,10 +40,10 @@ body {
         position: absolute;
         overflow-y: scroll;
         overflow-x: hidden;
-        top: 48px; // shift the distance of the headers height.
+        top: 49px; // shift the distance of the headers height.
         left: -17px; // shift for scrollbar and calculate width, so we don't lose ratio.
         width: calc( 100% + 17px ); // account for scrollbar
-        height: calc( 100vh - 48px ); // subtract header height shift
+        height: calc( 100vh - 49px ); // subtract header height shift
 
         .page {
           position: relative;

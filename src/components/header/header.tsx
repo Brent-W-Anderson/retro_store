@@ -14,19 +14,19 @@ export default class Header extends Component<{ activePage:string, selectActiveP
 
         <ul className='links'>
             <li className={`link${ activePage === 'home' ? ' selected' : '' }`}>
-              <h2 onClick={ () => selectActivePage( 'home' ) } > Home </h2>
+              <h2 onClick={ () => selectActivePage( 'home' ) } > HOME </h2>
             </li>
 
             <li className={`link${ activePage === 'search' ? ' selected' : '' }`}>
-              <h2 onClick={ () => selectActivePage( 'search' ) }> Search </h2>
+              <h2 onClick={ () => selectActivePage( 'search' ) }> SEARCH </h2>
             </li>
 
             <li className='link inactive'>
-              <h2> link 3 </h2>
+              <h2> LINK </h2>
             </li>
 
             <li className='link inactive'>
-              <h2> link 4 </h2>
+              <h2> LINK </h2>
             </li>
         </ul>
 

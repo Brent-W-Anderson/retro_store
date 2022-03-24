@@ -5,7 +5,7 @@ export default class SearchPage extends Component {
   render() {
     return (
       <div id='search' className="page">
-        <h2> start building search page here.. </h2>
+        <h3> start building search page here.. </h3>
       </div>
     );
   }
