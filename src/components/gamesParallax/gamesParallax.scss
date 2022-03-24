@@ -8,6 +8,7 @@
     img {
         float: left; // fit-content on the vertical
         height: 12vw;
+        border-radius: 5px;
 
         @include breakpoint_max( $small_screen ) {
             height: 20vw;
