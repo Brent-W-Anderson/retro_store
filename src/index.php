@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="./assets/icon.png">
-    <title>retro store</title>
+    <title>retro store - home</title>
   </head>
 
   <body>
@@ -17,7 +17,7 @@
 <?php 
   // home specific php can go here.
 
-
+  
   // Any other page logic can be included here (make sure to include any new php to webpack, too)
   include "./PHP/search.php" 
 ?>

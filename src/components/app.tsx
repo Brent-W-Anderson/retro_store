@@ -25,6 +25,9 @@ export default class App extends Component {
     this.setState({
       activePage: selectedPage
     });
+
+    var tt0 = document.getElementsByTagName('title');
+    tt0[ 0 ].innerHTML = `retro store - ${ selectedPage }`; 
   }
 
   render() {

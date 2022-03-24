@@ -21,5 +21,5 @@ export default async function RAWG( param:string, pageNum:number )  {
 
     console.warn( 'data loaded:' );
     console.warn( await fetchData() );
-    return await fetchData();
+    return fetchData();
 }
