@@ -7,7 +7,7 @@ import GamesParallax from '../../gamesParallax/gamesParallax';
 // API
 import RAWG from '../../RAWG/RAWG';
 
-export default class HomePage extends Component<{ offsetY:number }> {
+export default class HomePage extends Component<{ offsetY:number, scrolling:boolean }> {
   state = {
     games: []
   }
@@ -22,7 +22,7 @@ export default class HomePage extends Component<{ offsetY:number }> {
 
   render() {
     const { games } = this.state;
-    const { offsetY } = this.props;
+    const { offsetY, scrolling } = this.props;
 
     return (
       <div id='home' className="page">
@@ -36,7 +36,8 @@ export default class HomePage extends Component<{ offsetY:number }> {
               <GamesParallax 
                 key={ game.id } 
                 game={ game } 
-                offsetY={ offsetY } 
+                offsetY={ offsetY }
+                scrolling={ scrolling }
               />
             );
           } ) }

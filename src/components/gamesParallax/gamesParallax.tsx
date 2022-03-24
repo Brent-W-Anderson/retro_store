@@ -1,7 +1,7 @@
 
 import { Component } from 'react';
 
-export default class GamesParallax extends Component<{ game:{ id:number, background_image:string }, offsetY:number }> {
+export default class GamesParallax extends Component<{ game:{ id:number, background_image:string }, offsetY:number, scrolling:boolean }> {
   state = {
     zoom: 0
   }
@@ -16,7 +16,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
 
   handleGames = () => {
     const { zoom } = this.state;
-    const { game, offsetY } = this.props;
+    const { game, offsetY, scrolling } = this.props;
 
     const x = game.id % 9;
     let y = game.id % 10;
@@ -43,7 +43,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                     transform: `translateY(${ offsetY * 0.45 }px) scale(${ 0.7 + zoom })`,
                     top: position === 'top' ? y + 'vh' : -y/y + 'vh',
                     left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
-                    transition: `${ zoom  }s`
+                    transition: `${ scrolling ? 0 : zoom + 0.1 }s`
                 }}
             > <img key={ game.id } src={ game.background_image } />
             </div>
@@ -62,7 +62,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                     transform: `translateY(${ offsetY * 0.5 }px) scale(${ 1.0 + zoom })`,
                     top: position === 'top' ? y + 'vh' : -y/y + 'vh',
                     left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
-                    transition: `${ zoom  }s`
+                    transition: `${ scrolling ? 0 : zoom + 0.1 }s`
                 }}
             > <img key={ game.id } src={ game.background_image } />
             </div>
@@ -81,7 +81,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                     transform: `translateY(${ offsetY * 0.55 }px) scale(${ 1.3 + zoom })`,
                     top: position === 'top' ? y + 'vh' : -y/y + 'vh',
                     left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
-                    transition: `${ zoom  }s`
+                    transition: `${ scrolling ? 0 : zoom + 0.1 }s`
                 }}
             > <img key={ game.id } src={ game.background_image } />
             </div>
