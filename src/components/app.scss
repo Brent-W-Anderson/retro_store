@@ -77,6 +77,7 @@ body {
           border: 2px solid $app_accent;
           border-right: none;
           border-radius: 7.5px 0 0 7.5px;
+          box-shadow: 0 0 10px $app_accent_highlight;
         }
       }
 
