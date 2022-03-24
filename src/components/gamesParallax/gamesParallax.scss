@@ -18,6 +18,7 @@
         z-index: 1;
 
         img {
+            opacity: 0.95;
             box-shadow: 0 6px 10px 0 rgb(0 0 0 / 60%), 0 3px 10px 0 rgb(0 0 0 / 50%);
         }
     }
@@ -26,6 +27,7 @@
         z-index: 2;
 
         img {
+            opacity: 0.9;
             box-shadow: 0 8px 13px 0 rgb(0 0 0 / 45%), 0 4.5px 15px 0 rgb(0 0 0 / 40%);
         }
     }
@@ -34,6 +36,7 @@
         z-index: 3;
 
         img {
+            opacity: 0.85;
             box-shadow: 0 10px 16px 0 rgb(0 0 0 / 30%), 0 6px 20px 0 rgb(0 0 0 / 30%);
         }
     }
@@ -42,7 +45,7 @@
         z-index: 4;
         
         img {
-            opacity: 1 !important; // override default
+            opacity: 1;
         }
     }
 }

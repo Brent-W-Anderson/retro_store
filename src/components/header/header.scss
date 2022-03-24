@@ -2,11 +2,13 @@
 // header styles go here..
 #header {
     position: fixed;
-    background: $header_background;
+    user-select: none;
     width: 100vw;
+    height: 37px;
     z-index: 10;
 
     @include breakpoint_min( $large_screen ) {
+        height: unset;
         border-bottom: 2px solid $app_accent;
     }
 
@@ -26,45 +28,40 @@
         }
     
         .link {
-            user-select: none;
             list-style: none;
+            box-sizing: border-box;
             text-align: center;
             width: -webkit-fill-available;
-            padding: 10px;
             margin: 0 10px;
+            padding: 10px;
 
-            a {
+            h2 {
                 cursor: pointer;
+                width: fit-content;
+                margin: auto;
                 text-decoration: none;
+                font-size: 1rem;
+                padding: 3px 10px;
                 color: $header_link;
       
                 &:active {
                     color: darken( $header_link, 10% );
-                }
-
-                &[ href="#" ] {
-                    cursor: default;
-                }
-
-                @include breakpoint_min( $large_screen ) {
-                    font-size: 150%;
-                    line-height: 38px;
                 }
             }
 
             &.inactive {
                 text-decoration: line-through;
 
-                a {
+                h2 {
                     cursor: not-allowed;
                     color: darken( $header_link, 50% );
                 }
             }
 
-            &.selected a { // show selected page with it underlined..
+            &.selected h2 { // show selected page with it underlined..
+                cursor: default;
                 color: $selected_link_text;
                 border-bottom: 2px solid $selected_link_underline;
-                padding: 3px 10px;
 
                 &:active {
                     color: inherit;
@@ -77,19 +74,32 @@
         position: absolute;
         box-sizing: border-box;
         width: 20vw;
-        height: 20px;
-        bottom: -20px;
-        border-radius: 0 0 10px 0;
-        border-bottom: 2px solid $app_accent;
-        border-right: 2px solid $app_accent;
-        background: $header_background;
+        height: 40px;
+        bottom: -30px;
+        border-radius: 0 10px 10px 0;
+        border: 2px solid $app_accent;
+        border-left: none;
+        background: $header_accent_background;
+
+        h1 {
+            text-align: right;
+            padding: 0 10px;
+            text-shadow: 
+            1px 1px 1px $app_accent,
+            -1px -1px 1px $app_accent,
+            1px -1px 1px $app_accent,
+            -1px 1px 1px $app_accent;
+        }
 
         &.right {
             right: 0;
-            border-radius: 0 0 0 10px;
-            border-right: unset;
-            border-bottom: 2px solid $app_accent;
-            border-left: 2px solid $app_accent;
+            border-radius: 10px 0 0 10px;
+            border: 2px solid $app_accent;
+            border-right: none;
+
+            h1 {
+                text-align: left;
+            }
         }
 
         @include breakpoint_max( $small_screen ) {

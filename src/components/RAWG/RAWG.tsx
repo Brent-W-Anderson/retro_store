@@ -10,7 +10,12 @@ export default async function RAWG( param:string, pageNum:number )  {
         .then( response => response.json() )
         .then( data => {
             return data.results;
+        } )
+        .catch( error => {
+            throw( 'ERROR: RAWG failed to fetch: ' + error );
         } );
 
+    console.warn( 'data loaded:' );
+    console.warn( await data );
     return data;
 }

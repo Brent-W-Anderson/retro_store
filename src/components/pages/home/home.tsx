@@ -26,14 +26,12 @@ export default class HomePage extends Component<{ offsetY:number }> {
 
     return (
       <div id='home' className="page">
-        <h2> Welcome to Retro Retro </h2>
-
         <div id='rolodex'>
-          <h2>Featured Content</h2>
+          <h3>Featured Content</h3>
         </div>
 
         <div className='games'>
-          { games.map( ( game: { id:number, background_image:string } ) => { 
+          { games?.map( ( game: { id:number, background_image:string } ) => { 
             return (
               <GamesParallax 
                 key={ game.id } 

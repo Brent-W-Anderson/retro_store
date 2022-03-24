@@ -2,37 +2,37 @@
 import { Component } from 'react';
 
 // the header needs to know which page it's on, so it knows which links to display.
-export default class Header extends Component<{ page:string }> {
-  state = {
-    activeLink: this.props.page.toLowerCase()
-  }
-
+export default class Header extends Component<{ activePage:string, selectActivePage( selectedPage:string ):void }> {
   render() {
-    const { activeLink } = this.state;
+    const { activePage, selectActivePage } = this.props;
 
     return (
       <div id='header'>
-        <div className='accent' />
+        <div className='accent'>
+          <h1> RETRO </h1>  
+        </div>
 
         <ul className='links'>
-            <li className={`link${ activeLink === 'home' ? ' selected' : '' }`}>
-              <a href={activeLink === 'home' ? '#' : `./index.php`}> Home </a>
+            <li className={`link${ activePage === 'home' ? ' selected' : '' }`}>
+              <h2 onClick={ () => selectActivePage( 'home' ) } > Home </h2>
             </li>
 
-            <li className={`link${ activeLink === 'search' ? ' selected' : '' }`}>
-              <a href={activeLink === 'search' ? '#' : `./search.php`}> Search </a>
-            </li>
-
-            <li className='link inactive'>
-              <a href='#'> link 3 </a>
+            <li className={`link${ activePage === 'search' ? ' selected' : '' }`}>
+              <h2 onClick={ () => selectActivePage( 'search' ) }> Search </h2>
             </li>
 
             <li className='link inactive'>
-              <a href='#'> link 4 </a>
+              <h2> link 3 </h2>
+            </li>
+
+            <li className='link inactive'>
+              <h2> link 4 </h2>
             </li>
         </ul>
 
-        <div className='accent right' />
+        <div className='accent right'>
+          <h1> RETRO </h1>  
+        </div>
       </div>
     );
   }

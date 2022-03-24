@@ -45,7 +45,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                     left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
                     transition: `${ zoom  }s`
                 }}
-            > <img key={ game.id } src={ game.background_image } style={{ opacity: '0.95' }} />
+            > <img key={ game.id } src={ game.background_image } />
             </div>
         );
       }
@@ -64,7 +64,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                     left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
                     transition: `${ zoom  }s`
                 }}
-            > <img key={ game.id } src={ game.background_image } style={{ opacity: '0.9' }} />
+            > <img key={ game.id } src={ game.background_image } />
             </div>
         );
       }
@@ -83,7 +83,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                     left: position === 'top' ? -y + 'vw' : y + 'vw', // reverse for left-to-right
                     transition: `${ zoom  }s`
                 }}
-            > <img key={ game.id } src={ game.background_image } style={{ opacity: '0.85' }} />
+            > <img key={ game.id } src={ game.background_image } />
             </div>
         );
       }

@@ -16,8 +16,15 @@ body {
     .app {
       // reset browser altered DOM elements
       h1, h2, h3, h4, h5, h6, ul, ol, p {
+        text-align: center;
         margin: 0;
         padding: 0;
+        color: $text;
+        text-shadow: 
+          1px 1px 1px $text_shadow,
+          -1px -1px 1px $text_shadow,
+          1px -1px 1px $text_shadow,
+          -1px 1px 1px $text_shadow;
       }
 
       // header:
@@ -28,10 +35,10 @@ body {
         position: absolute;
         overflow-y: scroll;
         overflow-x: hidden;
-        top: 38px; // shift the distance of the headers height.
+        top: 48px; // shift the distance of the headers height.
         left: -17px; // shift for scrollbar and calculate width, so we don't lose ratio.
         width: calc( 100% + 17px ); // account for scrollbar
-        height: calc( 100vh - 38px ); // subtract header height
+        height: calc( 100vh - 48px ); // subtract header height shift
 
         .page {
           position: relative;
@@ -42,22 +49,16 @@ body {
           padding: 20px; // need at least 20px left-t0-right here because we're hiding the header curve when we scroll anything up past it
           padding-top: 40px;
 
+          h3 {
+            font-size: 1.8rem;
+          }
+
           @include breakpoint_max( $small_screen ) {
             width: 100vw;
           }
 
           @include breakpoint_min( $large_screen ) {
             width: 100vw;
-          }
-  
-          h2 {
-            text-align: center;
-            color: $text;
-            text-shadow: 
-              1px 1px 1px $text_shadow,
-              -1px -1px 1px $text_shadow,
-              1px -1px 1px $text_shadow,
-              -1px 1px 1px $text_shadow;
           }
         }
 
@@ -67,6 +68,7 @@ body {
         }
         
         &::-webkit-scrollbar {
+          cursor: pointer;
           width: 17px; // this is usually the default size.
         }
         

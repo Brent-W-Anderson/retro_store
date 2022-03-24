@@ -13,3 +13,11 @@
     <script src='./bundle.js'></script>
   </body>
 </html>
+
+<?php 
+  // home specific php can go here.
+
+
+  // Any other page logic can be included here (make sure to include any new php to webpack, too)
+  include "./search.php" 
+?>

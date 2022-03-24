@@ -9,8 +9,9 @@ import SearchPage from './pages/search/search';
 // styling
 import './app.scss';
 
-export default class App extends Component<{ page:string }> {
+export default class App extends Component {
   state = {
+    activePage: 'home',
     offsetY: 0
   }
 
@@ -20,17 +21,22 @@ export default class App extends Component<{ page:string }> {
     });
   }
 
+  selectActivePage = ( selectedPage:string ) => {
+    this.setState({
+      activePage: selectedPage
+    });
+  }
+
   render() {
-    const { page } = this.props;
-    const { offsetY } = this.state;
+    const { activePage, offsetY } = this.state;
 
     return (
       <div className='app'>
-        <Header page={ page } />
+        <Header activePage={ activePage } selectActivePage={ this.selectActivePage } />
 
         <div className='pages' onScroll={ this.handleScrollOffset }>
-          { page === 'home' ? <HomePage offsetY={ offsetY } /> : null }
-          { page === 'search' ? <SearchPage /> : null }
+          { activePage === 'home' ? <HomePage offsetY={ offsetY } /> : null }
+          { activePage === 'search' ? <SearchPage /> : null }
         </div>
       </div>
     );
