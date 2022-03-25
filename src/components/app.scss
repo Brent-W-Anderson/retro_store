@@ -50,20 +50,13 @@ body {
           margin: auto;
           box-sizing: border-box;
           left: 17px; // push back to center
-          width: 60%;
+          width: 80%;
+          max-width: 1536px; // 80% of large screen width
           padding: 20px; // need at least 20px left-t0-right here because we're hiding the header curve when we scroll anything up past it
           padding-top: 40px;
 
           h3 {
             font-size: 1.8rem;
-          }
-
-          @include breakpoint_max( $small_screen ) {
-            width: 100vw;
-          }
-
-          @include breakpoint_min( $large_screen ) {
-            width: 100vw;
           }
         }
 

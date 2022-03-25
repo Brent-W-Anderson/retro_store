@@ -16,18 +16,17 @@ export default class App extends Component {
     scrolling: false
   }
 
-  handleScrollOffset = ( e:React.UIEvent<HTMLElement> ) => {
-    this.setState({
-      offsetY: e.currentTarget.scrollTop,
-      scrolling: true
-    });
+  pauseTransition = () => {
+    this.setState({ scrolling: true });
 
-    setTimeout( () => { // disable zoom on hover, when scrolling.
-      this.setState({
-        scrolling: false
-      });
-
+    setTimeout( () => {
+      this.setState({ scrolling: false });
     }, 150 );
+  }
+
+  handleScrollOffset = ( e:React.UIEvent<HTMLElement> ) => {
+    this.setState({ offsetY: e.currentTarget.scrollTop });
+    this.pauseTransition();
   }
 
   selectActivePage = ( selectedPage:string ) => {

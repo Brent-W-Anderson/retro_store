@@ -2,12 +2,15 @@
 #home {
     .games {
         display: grid;
-        grid-row-gap: 20px;
         grid-template-columns: 33.33% 33.34% 33.33%;
         margin-top: 50px;
 
+        @include breakpoint_max( $small_screen ) {
+            grid-template-columns: 50% 50%;
+        }
+
         @include breakpoint_min( $large_screen ) {
-            grid-template-columns: 20% 20% 20% 20% 20%;
+            grid-template-columns: 25% 25% 25% 25%;
         }
 
         // games parallax styles
