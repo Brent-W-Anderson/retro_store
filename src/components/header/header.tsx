@@ -3,14 +3,14 @@ import { Component } from 'react';
 import { Menu, Home, Search } from '@mui/icons-material';
 
 // the header needs to know which page it's on, so it knows which links to display.
-export default class Header extends Component<{ activePage:string, selectActivePage( selectedPage:string ):void }> {
+export default class Header extends Component<{ activePage:string, selectActivePage( selectedPage:string ):void, handleSidebar():void, sidebarOpen:boolean }> {
   render() {
-    const { activePage, selectActivePage } = this.props;
+    const { activePage, selectActivePage, handleSidebar, sidebarOpen } = this.props;
 
     return (
       <div id='header'>
-        <div className='accent'>
-          <h1> RETRO <Menu /></h1>
+        <div className='accent' style={{ height: sidebarOpen ? 'calc( 100vh - 19px )' : '' }}>
+          <h1> RETRO <Menu onClick={ handleSidebar } /></h1>
 
           <ul className='sidebar'>
             <li className='link inactive'>

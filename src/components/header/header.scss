@@ -107,7 +107,7 @@
                 border-radius: 10px;
                 right: 15px;
                 font-size: 2.4rem;
-                transition: .2s;
+                transition: .1s;
 
                 &:hover {
                     box-shadow: inset 0 0 5px $header_link;
@@ -141,8 +141,8 @@
         @include breakpoint_min( $large_screen ) {
             overflow: hidden;
             height: 60px;
-            top: 24px;
-            // height: calc( 100vh - 29px );
+            top: 19px;
+            transition: .2s;
 
             h1, &.right h1 {
                 text-align: center;

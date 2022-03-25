@@ -13,7 +13,8 @@ export default class App extends Component {
   state = {
     activePage: 'home',
     offsetY: 0,
-    scrolling: false
+    scrolling: false,
+    sidebarOpen: false
   }
 
   pauseTransition = () => {
@@ -29,6 +30,14 @@ export default class App extends Component {
     this.pauseTransition();
   }
 
+  handleSidebar = () => {
+    const { sidebarOpen } = this.state;
+
+    sidebarOpen ? // toggle
+      this.setState({ sidebarOpen: false }) :
+      this.setState({ sidebarOpen: true });
+  }
+
   selectActivePage = ( selectedPage:string ) => {
     this.setState({
       activePage: selectedPage
@@ -39,11 +48,16 @@ export default class App extends Component {
   }
 
   render() {
-    const { activePage, offsetY, scrolling } = this.state;
+    const { activePage, offsetY, scrolling, sidebarOpen } = this.state;
 
     return (
       <div className='app'>
-        <Header activePage={ activePage } selectActivePage={ this.selectActivePage } />
+        <Header 
+          activePage={ activePage } 
+          selectActivePage={ this.selectActivePage }
+          handleSidebar={ this.handleSidebar }
+          sidebarOpen={ sidebarOpen }
+        />
 
         <div className='pages' onScroll={ this.handleScrollOffset }>
           { activePage === 'home' ? <HomePage offsetY={ offsetY } scrolling={ scrolling } /> : null }
