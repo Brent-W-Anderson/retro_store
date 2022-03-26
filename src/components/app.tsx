@@ -17,6 +17,16 @@ export default class App extends Component {
     sidebarOpen: false
   }
 
+  componentDidMount = () => {
+    window.addEventListener( 'resize', this.handleResize )
+  }
+
+  handleResize = () => {
+    if( window.screen.width < 1920 ) {
+      this.setState({ sidebarOpen: false });
+    }
+  }
+
   pauseTransition = () => {
     this.setState({ scrolling: true });
 
