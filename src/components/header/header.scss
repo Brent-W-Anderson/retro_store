@@ -48,9 +48,11 @@
             font-size: 1rem;
             padding: 3px 10px;
             color: $header_link;
+            transition: .1s;
   
             &:active {
-                color: darken( $header_link, 10% );
+                color: $color_pink;
+                transform: scale( 0.96 );
             }
 
             svg {
@@ -91,7 +93,8 @@
             }
 
             &:active {
-                color: inherit;
+                color: $selected_link_text;
+                transform: scale( 1 );
             }
         }
     }
@@ -127,13 +130,9 @@
                 font-size: 2.4rem;
                 transition: .1s;
 
-                &:hover {
-                    color: $color_pink;
-                }
-
                 &:active {
-                    color: $color_yellow;
-                    transform: scale( 0.9 );
+                    color: $color_pink;
+                    transform: scale( 0.92 );
                 }
 
                 @include breakpoint_min( $large_screen ) {
