@@ -3,6 +3,7 @@
 #header {
     position: fixed;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
     box-shadow: 0 2px 10px $app_accent_highlight;
     width: 100vw;
     height: 49px;
