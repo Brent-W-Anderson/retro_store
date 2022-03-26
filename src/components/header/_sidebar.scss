@@ -6,4 +6,10 @@
     @include breakpoint_min( $large_screen ) {
         display: block;
     }
+
+    .link {
+        h2 {
+            pointer-events: all;
+        }
+    }
 }
