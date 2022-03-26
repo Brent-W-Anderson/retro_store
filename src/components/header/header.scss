@@ -80,6 +80,7 @@
 
     .accent {
         position: absolute;
+        pointer-events: none;
         box-sizing: border-box;
         width: 20vw;
         max-width: 384px;
@@ -88,7 +89,7 @@
         border-radius: 0 10px 10px 0;
         border: 2px solid $app_accent;
         border-left: none;
-        background: $header_accent_background;
+        background: linear-gradient( 180deg, $header_accent_background, $header_accent_background 60px, transparent );
         box-shadow: 0 0 10px $app_accent_highlight;
 
         h1 {
@@ -102,6 +103,7 @@
 
             svg {
                 cursor: pointer;
+                pointer-events: all;
                 display: none;
                 position: absolute;
                 border-radius: 10px;
