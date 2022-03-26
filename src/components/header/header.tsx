@@ -9,7 +9,7 @@ export default class Header extends Component<{ activePage:string, selectActiveP
 
     return (
       <div id='header'>
-        <div className={ `accent${ sidebarOpen ? ' open' : '' }` } style={{ height: sidebarOpen ? 'calc( 100vh - 19px )' : '' }}>
+        <div className={ `accent${ sidebarOpen ? ' open' : '' }` } style={{ height: sidebarOpen ? '261px' : '' }}>
           <h1> RETRO 
             { sidebarOpen ? 
                 <MenuOpen onClick={ handleSidebar } /> : 

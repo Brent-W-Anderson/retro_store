@@ -80,7 +80,6 @@
 
     .accent {
         position: absolute;
-        pointer-events: none;
         box-sizing: border-box;
         width: 20vw;
         max-width: 384px;
@@ -93,7 +92,6 @@
         box-shadow: 0 0 10px $app_accent_highlight;
 
         h1 {
-            pointer-events: all;
             text-align: right;
             padding: 0 10px;
             text-shadow: 
