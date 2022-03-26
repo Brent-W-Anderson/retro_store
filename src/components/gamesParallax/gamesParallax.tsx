@@ -28,8 +28,8 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
     else {
       position = 'bottom';
     }
-    const z = y * 2;
-    y*= 1; // ratio for offsets ( increase this to make tiles more sporadic )
+    const z = y * 2; // ratio offsets from left-to-right
+    y*= 10; // ratio offsets from top-to-bottom
     
     switch( x ) {
       case 0: 
@@ -42,7 +42,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                 onMouseLeave={ this.releaseZoom }
                 style={{
                     transform: `translateY(${ offsetY * 0.45 }px) scale(${ 0.7 + zoom })`,
-                    top: position === 'top' ? y + 'vh' : -y + 'vh',
+                    top: position === 'top' ? y + 'px' : -y + 'px',
                     left: position === 'top' ? -z + 'vw' : z + 'vw', // reverse for left-to-right
                     transition: `${ scrolling ? 0 : zoom + 0.1 }s`
                 }}
@@ -61,7 +61,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                 onMouseLeave={ this.releaseZoom }
                 style={{
                     transform: `translateY(${ offsetY * 0.5 }px) scale(${ 1.0 + zoom })`,
-                    top: position === 'top' ? y + 'vh' : -y + 'vh',
+                    top: position === 'top' ? y + 'px' : -y + 'px',
                     left: position === 'top' ? -z + 'vw' : z + 'vw', // reverse for left-to-right
                     transition: `${ scrolling ? 0 : zoom + 0.1 }s`
                 }}
@@ -80,7 +80,7 @@ export default class GamesParallax extends Component<{ game:{ id:number, backgro
                 onMouseLeave={ this.releaseZoom }
                 style={{
                     transform: `translateY(${ offsetY * 0.55 }px) scale(${ 1.3 + zoom })`,
-                    top: position === 'top' ? y + 'vh' : -y + 'vh',
+                    top: position === 'top' ? y + 'px' : -y + 'px',
                     left: position === 'top' ? -z + 'vw' : z + 'vw', // reverse for left-to-right
                     transition: `${ scrolling ? 0 : zoom + 0.1 }s`
                 }}

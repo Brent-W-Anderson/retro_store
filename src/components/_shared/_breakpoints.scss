@@ -5,13 +5,13 @@ $large_screen: 1920px;
 
 // breakpoints..
 @mixin breakpoint_max( $width ) {
-    @media ( max-width: $width ) {
+    @media screen and ( max-width: $width ) {
         @content;
     }
 }
 
 @mixin breakpoint_min( $width ) {
-    @media ( min-width: $width ) {
+    @media screen and ( min-width: $width ) {
         @content;
     }
 }

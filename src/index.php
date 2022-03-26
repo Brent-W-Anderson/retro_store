@@ -3,7 +3,7 @@
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <link rel="icon" href="./assets/icon.png">
     <title>retro store - home</title>
   </head>
