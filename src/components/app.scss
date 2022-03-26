@@ -72,10 +72,15 @@ body {
         
         &::-webkit-scrollbar-thumb {
           background: transparent;
-          border: 2px solid $page_scrollbar;
-          border-right: none;
+          border: 2px solid $app_accent;
+          border-right: none !important;
           border-radius: 7.5px 0 0 7.5px;
-          box-shadow: 0 0 10px $page_scrollbar_highlight;
+          box-shadow: 0 0 10px $app_accent_highlight;
+
+          &:active {
+            border: 2px solid $scrollbar_active;
+            box-shadow: 0 0 10px $scrollbar_active_highlight;
+          }
         }
       }
 

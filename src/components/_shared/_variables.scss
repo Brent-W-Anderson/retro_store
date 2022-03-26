@@ -22,5 +22,9 @@ $app_accent: $color_neon;
 $app_accent_highlight: $color_white;
 
 // scrollbar
-$page_scrollbar: $color_yellow;
-$page_scrollbar_highlight: $color_pink;
+$scrollbar_active: $color_yellow;
+$scrollbar_active_highlight: $color_pink;
+
+// sidebar
+$sidebar_open: $color_yellow;
+$sidebar_open_highlight: $color_pink;

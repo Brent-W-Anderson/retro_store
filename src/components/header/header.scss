@@ -110,10 +110,11 @@
                 transition: .1s;
 
                 &:hover {
-                    box-shadow: inset 0 0 5px $header_link;
+                    color: $color_pink;
                 }
 
                 &:active {
+                    color: $color_yellow;
                     transform: scale( 0.9 );
                 }
 
@@ -131,6 +132,28 @@
 
             h1 {
                 text-align: left;
+            }
+        }
+
+        &.open {
+            border: 2px solid $sidebar_open;
+            border-left: none;
+            box-shadow: 0 0 10px $sidebar_open_highlight;
+
+            h1 {
+                text-shadow: 
+                1px 1px 1px $sidebar_open,
+                -1px -1px 1px $sidebar_open,
+                1px -1px 1px $sidebar_open,
+                -1px 1px 1px $sidebar_open;
+
+                svg {
+                    color: $color_yellow;
+
+                    &:active {
+                        color: $color_pink;
+                    }
+                }
             }
         }
 
