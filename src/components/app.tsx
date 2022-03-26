@@ -22,7 +22,7 @@ export default class App extends Component {
   }
 
   handleResize = () => {
-    if( window.screen.width < 1920 ) {
+    if( window.innerWidth < 1920 ) {
       this.setState({ sidebarOpen: false });
     }
   }
