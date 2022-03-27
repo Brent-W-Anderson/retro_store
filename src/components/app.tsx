@@ -70,8 +70,8 @@ export default class App extends Component {
         />
 
         <div className='pages' onScroll={ this.handleScrollOffset }>
-          { activePage === 'home' ? <HomePage offsetY={ offsetY } scrolling={ scrolling } /> : null }
-          { activePage === 'search' ? <SearchPage /> : null }
+          { activePage === 'home' ? <HomePage /> : null }
+          { activePage === 'search' ? <SearchPage offsetY={ offsetY } scrolling={ scrolling } /> : null }
         </div>
       </div>
     );
