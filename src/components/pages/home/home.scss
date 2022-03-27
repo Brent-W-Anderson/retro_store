@@ -1,24 +1,5 @@
 
 #home {
-    .games {
-        display: grid;
-        grid-template-columns: 33.33% 33.34% 33.33%;
-        margin-top: 50px;
-
-        @include breakpoint_min( 0px ) {
-            grid-template-columns: 50% 50%;
-        }
-
-        @include breakpoint_max( $small_screen ) {
-            grid-template-columns: 50% 50%;
-        }
-
-        @include breakpoint_min( $large_screen ) {
-            grid-template-columns: 25% 25% 25% 25%;
-        }
-
-        // games parallax styles
-        @import '../../gamesParallax/gamesParallax';
-    }
+    // home styles here..
 }
 
