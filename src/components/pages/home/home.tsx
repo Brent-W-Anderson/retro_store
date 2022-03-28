@@ -31,7 +31,7 @@ export default class HomePage extends Component {
           <h3>Welcome to Retro Retro</h3>
         </div>
         <div className='featured'>
-         This is where our rotating featured image should go
+         {/* This is where our rotating featured image should go */}
          
         </div>
         <div className='click-container'>
