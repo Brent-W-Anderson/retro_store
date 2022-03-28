@@ -24,7 +24,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
     const { searchVal } = this.state;
     const pageNum = 1;
 
-    if( e.key === 'Enter' ) this.setState({ games: await RAWG( searchVal, pageNum ) });
+    if( e.key === 'Enter' ) this.setState({ games: await RAWG( searchVal, 'games', pageNum ) });
   }
 
   render() {
