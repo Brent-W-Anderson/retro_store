@@ -1,50 +1,50 @@
 
-import {Component} from 'react';
-import { useState } from 'react';
-import { ReactDOM } from 'react';
+import { Component } from 'react';
 
 export default class AccountLogin extends Component {
-    
-    buttonAlerts() {
-        alert('Test');
+    state = {
+        login_username: '',
+        login_password: ''
     }
 
-    function submitLogin() {
-        const[inputs,  setInputs] = useState({});
+    handleSubmit = () => {
+        console.warn( 'form submitted..' );
+    }
 
-        const handleChange = (event: { target: { userID: string; password: any; }; }) => {
-            const userID = event.target.userID;
-            const password = event.target.password;
-            setInputs(values => ({...values, [userID]: password}))
-        }
-        const handleSubmit = (event: { preventDefault: () => void; }) => {
-            event.preventDefault();
-            console.log(inputs);
-        }
-    
+    handleUsername = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        this.setState({
+            login_username: e.target.value
+        });
+    }
 
-    
+    handlePassword = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        this.setState({
+            login_password: e.target.value
+        });
+    }
+
+    render() {
+        const { login_username, login_password } = this.state;
+
         return (
-            <form onSubmit={handleSubmit}>
-                <label>Enter ID: 
-                    <input 
+            <form onSubmit={ this.handleSubmit }>
+                <label> Enter ID: </label>
+                <input 
                     type='text'
-                    name='userID'
-                    value={inputs.userID || ''}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label>Password: 
-                    <input
-                    type='any'
-                    name='password'
-                    value={inputs.password || ''}
-                    onChange={handleChange}
-                    />
-                </label>
+                    name='login_username'
+                    value={ login_username }
+                    onChange={ this.handleUsername }
+                />
+                
+                <label> Password: </label>
+                <input 
+                    type='text'
+                    name='login_password'
+                    value={ login_password }
+                    onChange={ this.handlePassword }
+                />
             </form>
         );
-        ReactDOM.render(<submitLogin />, document.getElementById('root'));
     }
 }
 
