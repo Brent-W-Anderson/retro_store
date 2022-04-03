@@ -1,0 +1,15 @@
+
+#login { // login specific styles here..
+    display: grid; // center the form
+    grid-template-columns: 300px 300px; // define how many columns and how big here.
+    justify-content: center; // this centers everything in the form
+
+    fieldset {
+        display: grid; // put labels above inputs (get rid of this if you want it inline)
+        border: none;
+
+        label {
+            color: white;
+        }
+    }
+}

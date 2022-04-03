@@ -5,7 +5,7 @@ import { Component } from 'react';
 import Header from './header/header';
 import HomePage from './pages/home/home';
 import SearchPage from './pages/search/search';
-import AccountLogin from './pages/accountLogin/accountLogin';
+import Login from './pages/login/login';
 
 // styling
 import './app.scss';
@@ -73,7 +73,7 @@ export default class App extends Component {
         <div className='pages' onScroll={ this.handleScrollOffset }>
           { activePage === 'home' ? <HomePage /> : null }
           { activePage === 'search' ? <SearchPage offsetY={ offsetY } scrolling={ scrolling } /> : null }
-          { activePage === 'login' ? <AccountLogin /> : null}
+          { activePage === 'login' ? <Login /> : null}
         </div>
       </div>
     );
