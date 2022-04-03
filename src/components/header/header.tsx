@@ -62,7 +62,7 @@ export default class Header extends Component<{ activePage:string, selectActiveP
               </h2>
             </li>
 
-            <li className={`link${ activePage === 'accountLogin' ? 'selected' : ''}`}>
+            <li className={`link${ activePage === 'accountLogin' ? ' selected' : ''}`}>
               <h2 onClick={ () => selectActivePage( 'accountLogin' )}>
                 <AddLink />
                 <span> ACCOUNT LOGIN </span>
