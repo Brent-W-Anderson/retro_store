@@ -1,4 +1,13 @@
 
+// I could just as easily have thrown this link style in with the header.scss, but this could look logical to put it here too.
+#header .link {
+    h2 {
+        svg { // adjusting the position of our login icon differently from the base icons.
+            left: -17px;
+        }
+    }
+}
+
 #login { // login specific styles here..
     display: grid; // display as grid so we can split apart the fieldsets.
     grid-template-columns: 300px 300px; // define how many columns and how big here.
