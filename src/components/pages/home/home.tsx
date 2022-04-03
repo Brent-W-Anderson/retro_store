@@ -9,7 +9,8 @@ export default class HomePage extends Component {
   }
 
   async componentDidMount() {
-    this.setState({ featured: await RAWG( 'featured', 'games', 1 ) });
+    // remove comments when the RAWG API has a featured carousel to build into.
+    // this.setState({ featured: await RAWG( 'featured', 'games', 1 ) });
   }
 
   buildFeaturedContent = ( game:{ name:string } ) => {
