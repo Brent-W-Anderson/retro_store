@@ -1,11 +1,11 @@
 
 #login { // login specific styles here..
-    display: grid; // center the form
+    display: grid; // display as grid so we can split apart the fieldsets.
     grid-template-columns: 300px 300px; // define how many columns and how big here.
-    justify-content: center; // this centers everything in the form
+    justify-content: center; // this centers all of the columns in the form, even though there's space left and right.
 
     fieldset {
-        display: grid; // put labels above inputs (get rid of this if you want it inline)
+        display: grid; // display as grid to put labels above inputs (get rid of this if you want it inline)
         border: none;
 
         label {
