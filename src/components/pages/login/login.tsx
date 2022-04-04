@@ -7,9 +7,9 @@ export default class Login extends Component {
         login_password: ''
     }
 
-    handleSubmit = () => {
-        console.warn( 'form submitted..' );
-    }
+    //handleSubmit = () => {
+    //    console.warn( 'form submitted..' );
+    //}
 
     handleUsername = ( e:React.ChangeEvent<HTMLInputElement> ) => {
         this.setState({
@@ -27,7 +27,7 @@ export default class Login extends Component {
         const { login_username, login_password } = this.state;
 
         return (
-            <form id='login' className='page' onSubmit={ this.handleSubmit }>
+            <form id='login' className='page' action='http://localhost/retro_store/src/components/login/login.php'>
                 <fieldset>
                     <label> Enter ID: </label>
                     <input 
@@ -46,6 +46,9 @@ export default class Login extends Component {
                         value={ login_password }
                         onChange={ this.handlePassword }
                     />
+                </fieldset>
+                <fieldset>
+                    <input type='submit' value='submit'></input>
                 </fieldset>
             </form>
         );

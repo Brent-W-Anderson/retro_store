@@ -69,9 +69,9 @@ export default class Header extends Component<{ activePage:string, selectActiveP
               </h2>
             </li>
 
-            <li className='link inactive'>
-              <h2>
-                <ManageAccountsOutlined />
+            <li className={`link${ activePage === 'creation' ? ' selected' : '' }`}>
+              <h2 onClick={ () => selectActivePage( 'creation' ) } >
+                <ManageAccountsOutlined/>
                 <span> ACCOUNT </span>
               </h2>
             </li>
