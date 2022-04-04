@@ -1,5 +1,7 @@
 
-export default async function RAWG( param:string, filter:string, pageNum:number )  {
+export default async function RAWG( param:string, pageNum:number, filter?:string )  {
+    if( filter === undefined ) filter = 'games';
+
     const url = 'https://api.rawg.io/api'; // api url
     const search = `/${filter}?`; // what data to grab
     const key = 'key=' + process.env.RAWG_API_KEY; // RAWG API KEY ( create and .env file at the root of the project with your own key )
