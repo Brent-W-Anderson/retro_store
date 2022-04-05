@@ -3,11 +3,21 @@
     display: flex;
     justify-content: center;
 
+    input, input::placeholder {
+        text-shadow: 
+        1px 1px 1px $text_shadow,
+        -1px -1px 1px $text_shadow,
+        1px -1px 1px $text_shadow,
+        -1px 1px 1px $text_shadow;
+    }
+
     input {
         position: fixed;
         outline: auto;
         box-sizing: border-box;
         text-align: center;
+        background: transparent;
+        color: $text;
         font-size: 1.2rem;
         outline-color: $app_accent;
         border: 4px solid $color_black;
@@ -26,6 +36,11 @@
             outline-color: $color_yellow;
             box-shadow: 0 0 10px $color_pink;
         }
+
+        &::placeholder {
+            color: $text;
+            opacity: 0.5;
+        }
     }
 
     .search_icons {
@@ -40,6 +55,7 @@
             font-size: 32px;
             padding-top: 4px;
             padding-left: 4px;
+            color: $color_white;
         }
 
         @include breakpoint_max( $small_screen ) {
@@ -56,13 +72,18 @@
             position: relative;
             box-sizing: border-box;
             padding: 6px 18px;
+            padding-bottom: 0;
             width: 100%;
+            height: 46px;
 
             svg {
                 cursor: pointer;
-                color: $text;
+                stroke: $color_white;
+                stroke-width: 0.75px;
+                pointer-events: all;
+                color: transparent;
                 padding: 0;
-                font-size: 40px;
+                font-size: 50px;
                 transition: .1s;
 
                 &:last-child {
@@ -70,11 +91,11 @@
                 }
 
                 &:hover {
-                    color: $icon_hover;
+                    stroke: $icon_hover;
                 }
 
                 &:active {
-                    color: $icon_active;
+                    stroke: $icon_active;
                     transform: scale( 0.95 );
                 }
             }
