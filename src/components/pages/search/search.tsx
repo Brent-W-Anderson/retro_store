@@ -1,6 +1,6 @@
 
 import { Component } from 'react';
-import { Search } from '@mui/icons-material';
+import { Search, ArrowCircleLeftOutlined, ArrowCircleRightOutlined } from '@mui/icons-material';
 
 // API
 import RAWG from '../../RAWG/RAWG';
@@ -11,29 +11,35 @@ import GamesParallax from '../../gamesParallax/gamesParallax';
 export default class SearchPage extends Component<{ offsetY:number, scrolling:boolean }> {
   state = {
     games: [],
-    searchVal: ''
+    searchVal: '',
+    pageNum: 1
   }
 
   updateSearchVal = ( e:React.ChangeEvent<HTMLInputElement> ) => {
     this.setState({ searchVal: e.target.value });
   }
 
-  // TODO: pagination ( need to know total # of pages with return data )
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
-    const { searchVal } = this.state;
-    const pageNum = 1;
+    const { searchVal, pageNum } = this.state;
 
     if( e.key === 'Enter' ) this.setState({ games: await RAWG( searchVal, pageNum ) });
   }
 
+  paginateLeft = () => {
+    console.warn( 'left arrow clicked..' );
+  }
+
+  paginateRight = () => {
+    console.warn( 'right arrow clicked..' );
+  }
+
   render() {
-    const { games, searchVal } = this.state;
+    const { games, searchVal, pageNum } = this.state;
     const { offsetY, scrolling } = this.props;
 
     return (
       <div id='search' className="page">
-        <Search />
         <input 
           type='text'
           placeholder='search RAWG games library..'
@@ -41,6 +47,15 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
           onChange={ this.updateSearchVal }
           onKeyDown={ this.search }
         />
+
+        <div className='search_icons'>
+          <Search />
+
+          <div className='pagination_arrows'>
+            <ArrowCircleLeftOutlined onClick={ this.paginateLeft } />
+            <ArrowCircleRightOutlined onClick={ this.paginateRight } />
+          </div>
+        </div>
 
         <div className='games'>
           { games?.map( ( game: { id:number, background_image:string } ) => { 

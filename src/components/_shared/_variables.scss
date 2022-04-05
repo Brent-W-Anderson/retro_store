@@ -7,16 +7,6 @@ $color_purple: #220040;
 $color_white: rgb(240,240,240);
 $color_black: #333;
 
-// header
-$header_accent_background: $color_purple;
-$header_link: $color_white;
-$selected_link_underline: $color_pink;
-$selected_link_text: $color_yellow;
-
-// page text
-$text_shadow: $color_black;
-$text: $color_white;
-
 // app accents
 $app_accent: $color_neon;
 $app_accent_highlight: $color_white;
@@ -25,6 +15,20 @@ $app_accent_highlight: $color_white;
 $scrollbar_active: $color_yellow;
 $scrollbar_active_highlight: $color_pink;
 
+// header
+$header_accent_background: $color_purple;
+$header_link: $color_white;
+$selected_link_underline: $color_pink;
+$selected_link_text: $color_yellow;
+
 // sidebar
 $sidebar_open: $color_yellow;
 $sidebar_open_highlight: $color_pink;
+
+// page text
+$text_shadow: $color_black;
+$text: $color_white;
+
+// icon colors
+$icon_hover: $color_pink;
+$icon_active: $color_yellow;

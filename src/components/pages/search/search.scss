@@ -3,22 +3,24 @@
     display: flex;
     justify-content: center;
 
-    svg {
-        position: absolute;
-        font-size: 2.6rem;
-        bottom: 23px;
-        left: 26%;
-    }
-
     input {
+        position: fixed;
         outline: auto;
+        box-sizing: border-box;
         text-align: center;
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         outline-color: $app_accent;
         border: 4px solid $color_black;
         box-shadow: 0 0 10px $app_accent_highlight;
-        width: 50%;
+        max-width: 768px; // 40% of 1920
+        width: 40%;
         height: 40px;
+        z-index: 99;
+
+        @include breakpoint_max( $small_screen ) {
+            position: absolute;
+            width: 100%;
+        }
 
         &:focus {
             outline-color: $color_yellow;
@@ -26,13 +28,56 @@
         }
     }
 
-    @include breakpoint_max( $small_screen ) {
+    .search_icons {
+        position: fixed;
+        pointer-events: none;
+        max-width: 768px;
+        width: 40vw;
+        z-index: 100;
+
         svg {
-            left: 25px;
+            pointer-events: all;
+            font-size: 32px;
+            padding-top: 4px;
+            padding-left: 4px;
         }
 
-        input {
+        @include breakpoint_max( $small_screen ) {
+            position: absolute;
             width: 100%;
+            top: 44px;
+            
+            svg {
+                padding-top: 0;
+            }
+        }
+
+        .pagination_arrows {
+            position: relative;
+            box-sizing: border-box;
+            padding: 6px 18px;
+            width: 100%;
+
+            svg {
+                cursor: pointer;
+                color: $text;
+                padding: 0;
+                font-size: 40px;
+                transition: .1s;
+
+                &:last-child {
+                    float: right;
+                }
+
+                &:hover {
+                    color: $icon_hover;
+                }
+
+                &:active {
+                    color: $icon_active;
+                    transform: scale( 0.95 );
+                }
+            }
         }
     }
 
@@ -41,10 +86,7 @@
         display: grid;
         grid-template-columns: 33.33% 33.34% 33.33%;
         margin-top: 200px;
-
-        @include breakpoint_min( 0px ) {
-            grid-template-columns: 50% 50%;
-        }
+        width: 100%;
 
         @include breakpoint_max( $small_screen ) {
             grid-template-columns: 50% 50%;
