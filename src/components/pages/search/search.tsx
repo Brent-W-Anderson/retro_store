@@ -3,6 +3,7 @@
 // We can accomplish this by sending the state information to .php through an action, so we know which data and page to fetch from the backend.
 // set a cookie in .php, so the information is available for the frontend to display on request.
 
+import React from 'react';
 import { Component } from 'react';
 import { Search, ArrowCircleLeftOutlined, ArrowCircleRightOutlined } from '@mui/icons-material';
 
@@ -19,6 +20,8 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
     pageNum: 1
   }
 
+  formAction = React.createRef<HTMLFormElement>();
+
   updateSearchVal = ( e:React.ChangeEvent<HTMLInputElement> ) => {
     this.setState({ searchVal: e.target.value });
   }
@@ -27,7 +30,12 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
     const { searchVal, pageNum } = this.state;
 
-    if( e.key === 'Enter' ) this.setState({ games: await RAWG( searchVal, pageNum ) });
+    if( e.key === 'Enter' ) {
+      // instead of going to RAWG, let's use an action to send searchVal and pageNum -> search.php
+      this.formAction.current?.submit();
+
+      // this.setState({ games: await RAWG( searchVal, pageNum ) });
+    }
   }
 
   paginateLeft = () => {
@@ -44,13 +52,23 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
 
     return (
       <div id='search' className="page">
-        <input 
-          type='text'
-          placeholder='search RAWG games library..'
-          value={ searchVal }
-          onChange={ this.updateSearchVal }
-          onKeyDown={ this.search }
-        />
+        <form
+          ref={ this.formAction } 
+          method='POST'
+          action='./index.php'
+          target='search_iframe'
+        >
+          <input
+            type='text'
+            placeholder='Search RAWGs game library..'
+            name='searchInput'
+            value={ searchVal }
+            onChange={ this.updateSearchVal }
+            onKeyDown={ this.search }
+          />
+
+          <input name='pageNum' type='hidden' defaultValue={ pageNum } readOnly={ true } />
+        </form>
 
         <div className='search_icons'>
           <Search />
@@ -73,6 +91,8 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
             );
           } ) }
         </div>
+
+        <iframe name='search_iframe' style={{ display: 'none' }} />
       </div>
     );
   }

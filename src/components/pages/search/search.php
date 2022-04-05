@@ -1,16 +1,12 @@
 
 <?php
   // search logic goes here..
+  if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+    $searchVal = $_POST['searchInput'];
+    $pageNum = $_POST['pageNum'];
 
-  echo // alert if a user goes to this address.
-    "<script>
-      const rootHTML = document.getElementById('root');
-      if( !rootHTML ){
-        var tt0 = document.createElement(\"TITLE\"); 
-        tt0.innerHTML = 'retro store - search'; 
-        document.head.appendChild( tt0 );
-
-        alert( 'Wrong landing page, did you get lost?' );
-      }
-    </script>";
+    // these 2 values are coming from the frontend, so now we can securely use RAWG with our API key to make a search.
+    echo '<script> console.warn( "you typed: '.$searchVal.'" ); </script>';
+    echo '<script> console.warn( "page #'.$pageNum.'" ) </script>';
+  }
 ?>
