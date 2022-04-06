@@ -13,6 +13,7 @@ import GamesParallax from '../../gamesParallax/gamesParallax';
 export default class SearchPage extends Component<{ offsetY:number, scrolling:boolean }> {
   state = {
     games: [],
+    count: 0,
     searchVal: '',
     searchChanged: false,
     pageNum: 1
@@ -41,7 +42,8 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
       if( txtJson.results ) {
         searchData.innerHTML = ''; // reset data that was passed back to empty.
         this.setState({ 
-          games: txtJson.results // put the results into state.
+          games: txtJson.results, // put the results into state.
+          count: txtJson.count
         });
 
         console.warn( txtJson );
@@ -76,7 +78,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   }
 
   paginateRight = () => {
-    this.setState({ pageNum: this.state.pageNum + 1 });
+    this.setState({ pageNum: this.state.pageNum + 1, games: [] });
     this.formActionNext.current?.submit();
     this.dataSearch();
   }
@@ -102,7 +104,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
     const { pageNum } = this.state;
 
     if( pageNum > 1 ) {
-      this.setState({ pageNum: pageNum - 1 });
+      this.setState({ pageNum: pageNum - 1, games: [] });
       this.formActionPrevious.current?.submit();
       this.dataSearch();
     }
@@ -125,8 +127,36 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
     );
   }
 
+  currentCount = () => {
+    const { games, count, pageNum } = this.state;
+
+    if( games.length < 20 ) {
+      return count;
+    }
+    else {
+      return games.length * pageNum;
+    }
+  }
+
+  loadPageCount = () => {
+    const { games, count } = this.state;
+
+    if( games.length === 0 ) { // let the user know we're loading data in.
+      return '..Loading';
+    }
+    else {
+      return (
+        <span>
+          { this.currentCount() }
+          <br /><hr />
+          { count }
+        </span>
+      );
+    }
+  }
+
   render() {
-    const { games, searchVal, pageNum } = this.state;
+    const { games, searchVal, pageNum, count } = this.state;
     const { offsetY, scrolling } = this.props;
 
     return (
@@ -160,8 +190,8 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
             <Search />
 
             <div className='pagination_arrows'>
-              { pageNum === 1 ? null : <ArrowCircleLeftOutlined onClick={ this.paginateLeft } /> }
-              { games.length < 20 ? null : <ArrowCircleRightOutlined onClick={ this.paginateRight } /> }
+              { pageNum === 1 ? null : <div className='left'><ArrowCircleLeftOutlined onClick={ this.paginateLeft } /></div> }
+              { games.length < 20 ? null : <div className='right'><ArrowCircleRightOutlined onClick={ this.paginateRight } /></div> }
             </div>
           </div>
 
@@ -180,6 +210,10 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
         </div>
 
         <iframe ref={ this.iframeData } name='search_iframe' style={{ display: 'none' }} />
+        { count > 0 ? 
+          <h2 id='search_count'>
+            { this.loadPageCount() }
+          </h2> : null }
       </>
     );
   }
