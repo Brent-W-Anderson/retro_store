@@ -72,7 +72,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   }
 
   dataSearch = () => {
-    const dataSearch = setInterval( () => { // keep checking the DOM every .5s until we have our data
+    const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
       if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
     }, 250 );
   }
