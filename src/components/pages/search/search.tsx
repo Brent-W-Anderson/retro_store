@@ -14,6 +14,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   state = {
     games: [],
     searchVal: '',
+    searchChanged: false,
     pageNum: 1
   }
 
@@ -53,14 +54,15 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   }
 
   updateSearchVal = ( e:React.ChangeEvent<HTMLInputElement> ) => {
-    this.setState({ searchVal: e.target.value });
+    this.setState({ searchVal: e.target.value, searchChanged: true });
   }
 
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
-    const { searchVal } = this.state;
+    const { searchVal, searchChanged } = this.state;
 
     if( e.key === 'Enter' && searchVal.length >= 3 ) {
+      if( searchChanged ) this.setState({ pageNum: 1, searchChanged: false }); // reset page to 1 if the search was changed
       // instead of going to RAWG, let's use an action to send searchVal and pageNum -> search.php
       this.formAction.current?.submit();
       this.dataSearch();
