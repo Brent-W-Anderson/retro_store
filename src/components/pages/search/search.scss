@@ -4,15 +4,6 @@
     float: right;
     text-align: left;
 
-    span {
-        position: absolute;
-        text-align: center;
-
-        hr {
-            margin: 0;
-        }
-    }
-
     @include breakpoint_max( $small_screen ) {
         display: none;
     }

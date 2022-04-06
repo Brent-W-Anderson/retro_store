@@ -127,30 +127,27 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
     );
   }
 
-  currentCount = () => {
+  loadPageCount = () => {
     const { games, count, pageNum } = this.state;
 
-    if( games.length < 20 ) {
-      return count;
+    function currentCount() {
+      if( games.length < 20 ) {
+        return count;
+      }
+      else {
+        return games.length * pageNum;
+      }
     }
-    else {
-      return games.length * pageNum;
-    }
-  }
-
-  loadPageCount = () => {
-    const { games, count } = this.state;
 
     if( games.length === 0 ) { // let the user know we're loading data in.
       return '..Loading';
     }
     else {
       return (
-        <span>
-          { this.currentCount() }
-          <br /><hr />
-          { count }
-        </span>
+        <>
+          { Math.ceil( currentCount() / 20 ) }/
+          { Math.ceil( count / 20 ) }
+        </>
       );
     }
   }
