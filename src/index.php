@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -17,19 +16,6 @@
 <?php 
   // home specific php can go here.
 
-  
   // Any other page logic can be included here (make sure to include any new php to webpack, too)
   include "./PHP/search.php";
-
-  echo // alert if a user goes to the wrong url
-  "<script>
-    const rootHTML = document.getElementById('root');
-    if( !rootHTML ){
-      var tt0 = document.createElement(\"TITLE\"); 
-      tt0.innerHTML = 'retro store - invalid url'; 
-      document.head.appendChild( tt0 );
-
-      alert( 'Wrong url address, did you get lost?' );
-    }
-  </script>";
 ?>

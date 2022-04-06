@@ -7,9 +7,6 @@ import React from 'react';
 import { Component } from 'react';
 import { Search, ArrowCircleLeftOutlined, ArrowCircleRightOutlined } from '@mui/icons-material';
 
-// API
-import RAWG from '../../RAWG/RAWG';
-
 // components
 import GamesParallax from '../../gamesParallax/gamesParallax';
 
@@ -21,6 +18,24 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   }
 
   formAction = React.createRef<HTMLFormElement>();
+  iframeData = React.createRef<HTMLIFrameElement>();
+
+  checkData = () => {
+    const searchData = this.iframeData.current?.contentWindow?.document.getElementById( 'search_data' );
+
+    if( searchData?.innerHTML ) {
+      const txt = searchData.textContent; // convert to plain text to get rid of the crappy html that got carried over.
+      const txtJson = JSON.parse( String( txt ) ); // need to convert back to a string before we can break it into JSON.
+
+      console.warn( txtJson.results ); // our 20 results
+      console.warn( txtJson ); // more =)
+
+      this.setState({ games: txtJson.results })
+      return true;
+    }
+
+    return false;
+  }
 
   updateSearchVal = ( e:React.ChangeEvent<HTMLInputElement> ) => {
     this.setState({ searchVal: e.target.value });
@@ -28,13 +43,13 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
 
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
-    const { searchVal, pageNum } = this.state;
-
     if( e.key === 'Enter' ) {
       // instead of going to RAWG, let's use an action to send searchVal and pageNum -> search.php
       this.formAction.current?.submit();
 
-      // this.setState({ games: await RAWG( searchVal, pageNum ) });
+      const dataSearch = setInterval( () => { // keep checking the DOM every .5s until we have our data
+        if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
+      }, 500 );
     }
   }
 
@@ -55,7 +70,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
         <form
           ref={ this.formAction } 
           method='POST'
-          action='./index.php'
+          action='./PHP/search.php'
           target='search_iframe'
         >
           <input
@@ -92,7 +107,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
           } ) }
         </div>
 
-        <iframe name='search_iframe' style={{ display: 'none' }} />
+        <iframe ref={ this.iframeData } name='search_iframe' style={{ display: 'none' }} />
       </div>
     );
   }

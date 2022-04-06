@@ -15,4 +15,4 @@
   ### ** run wamp/xxamp from your dist directory by changing the *_url_ script to whatever location the server is running your projects from.* **
 
   ## RAWG API:
-  ### create your own api key here: https://rawg.io/apidocs and create an _.env_ file at the root of the project. add ```RAWG_API_KEY=<api_key_value_here_without_quotes>```
+  ### create your own api key here: https://rawg.io/apidocs and create a file specifically named ```RAWG_KEY.php``` at the root of the project. add ```$RAWG_KEY=""``` with your specific key within the quotes. Start the project and you should be good to go!

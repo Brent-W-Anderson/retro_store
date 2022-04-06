@@ -1,7 +1,6 @@
 
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   target: 'web',
@@ -23,10 +22,10 @@ module.exports = {
       patterns: [
         { from: './src/index.php' },
         { from: './src/components/pages/search/search.php', to: 'PHP' },
+        { from: './RAWG_KEY.php', to: 'PHP' },
         { from: './src/components/_assets', to: 'assets' }
       ]
-    }),
-    new Dotenv()
+    })
   ],
 
   // loaders
