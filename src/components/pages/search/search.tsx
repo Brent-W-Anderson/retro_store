@@ -18,20 +18,35 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   }
 
   formAction = React.createRef<HTMLFormElement>();
+  formActionPrevious = React.createRef<HTMLFormElement>();
+  formActionNext = React.createRef<HTMLFormElement>();
   iframeData = React.createRef<HTMLIFrameElement>();
 
   checkData = () => {
     const searchData = this.iframeData.current?.contentWindow?.document.getElementById( 'search_data' );
 
-    if( searchData?.innerHTML ) {
+    if( searchData?.textContent && searchData.textContent !== '' ) {
       const txt = searchData.textContent; // convert to plain text to get rid of the crappy html that got carried over.
-      const txtJson = JSON.parse( String( txt ) ); // need to convert back to a string before we can break it into JSON.
+      const txtString = String( txt ); // convert back to a normal string without the bs.
+      let txtJson;
 
-      console.warn( txtJson.results ); // our 20 results
-      console.warn( txtJson ); // more =)
+      try {
+        txtJson = JSON.parse( txtString ); // break it into JSON.
+      }
+      catch( e ) {
+        return true;
+      }
 
-      this.setState({ games: txtJson.results })
-      return true;
+      if( txtJson.results ) {
+        searchData.innerHTML = ''; // reset data that was passed back to empty.
+        this.setState({ 
+          games: txtJson.results // put the results into state.
+        });
+
+        console.warn( txtJson );
+  
+        return true;
+      }
     }
 
     return false;
@@ -43,22 +58,69 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
 
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
-    if( e.key === 'Enter' ) {
+    const { searchVal } = this.state;
+
+    if( e.key === 'Enter' && searchVal.length >= 3 ) {
       // instead of going to RAWG, let's use an action to send searchVal and pageNum -> search.php
       this.formAction.current?.submit();
-
-      const dataSearch = setInterval( () => { // keep checking the DOM every .5s until we have our data
-        if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
-      }, 500 );
+      this.dataSearch();
     }
   }
 
-  paginateLeft = () => {
-    console.warn( 'left arrow clicked..' );
+  dataSearch = () => {
+    const dataSearch = setInterval( () => { // keep checking the DOM every .5s until we have our data
+      if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
+    }, 250 );
   }
 
   paginateRight = () => {
-    console.warn( 'right arrow clicked..' );
+    this.setState({ pageNum: this.state.pageNum + 1 });
+    this.formActionNext.current?.submit();
+    this.dataSearch();
+  }
+
+  nextForm = () => {
+    const { searchVal, pageNum } = this.state;
+
+    return (
+      <form
+        ref={ this.formActionNext } 
+        method='POST'
+        action='./PHP/search.php'
+        target='search_iframe'
+        style={{ display: 'none' }}
+      >
+        <input type='text' name='searchInput' value={ searchVal } readOnly />
+        <input name='pageNum' type='hidden' value={ pageNum + 1 } readOnly />
+      </form>
+    );
+  }
+
+  paginateLeft = () => {
+    const { pageNum } = this.state;
+
+    if( pageNum > 1 ) {
+      this.setState({ pageNum: pageNum - 1 });
+      this.formActionPrevious.current?.submit();
+      this.dataSearch();
+    }
+  }
+
+  previousForm = () => {
+    const { searchVal, pageNum } = this.state;
+
+    return (
+      <form
+        ref={ this.formActionPrevious } 
+        method='POST'
+        action='./PHP/search.php'
+        target='search_iframe'
+        style={{ display: 'none' }}
+      >
+        <input type='text' name='searchInput' value={ searchVal } readOnly />
+        <input name='pageNum' type='hidden' value={ pageNum - 1 } readOnly />
+      </form>
+    );
   }
 
   render() {
@@ -66,49 +128,57 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
     const { offsetY, scrolling } = this.props;
 
     return (
-      <div id='search' className="page">
-        <form
-          ref={ this.formAction } 
-          method='POST'
-          action='./PHP/search.php'
-          target='search_iframe'
-        >
-          <input
-            type='text'
-            placeholder='Search RAWGs game library..'
-            name='searchInput'
-            value={ searchVal }
-            onChange={ this.updateSearchVal }
-            onKeyDown={ this.search }
-          />
+      <>
+        <div id='search' className="page">
+          <form
+            ref={ this.formAction } 
+            method='POST'
+            action='./PHP/search.php'
+            target='search_iframe'
+          >
+            <input
+              type='text'
+              placeholder='Search RAWGs game library..'
+              name='searchInput'
+              pattern='.{3,}'
+              title='3 characters minimum..'
+              value={ searchVal }
+              onChange={ this.updateSearchVal }
+              onKeyDown={ this.search }
+              required
+            />
 
-          <input name='pageNum' type='hidden' defaultValue={ pageNum } readOnly={ true } />
-        </form>
+            <input name='pageNum' type='hidden' value={ pageNum } readOnly />
+          </form>
 
-        <div className='search_icons'>
-          <Search />
+          { this.previousForm() }
+          { this.nextForm() }
 
-          <div className='pagination_arrows'>
-            <ArrowCircleLeftOutlined onClick={ this.paginateLeft } />
-            <ArrowCircleRightOutlined onClick={ this.paginateRight } />
+          <div className='search_icons'>
+            <Search />
+
+            <div className='pagination_arrows'>
+              { pageNum === 1 ? null : <ArrowCircleLeftOutlined onClick={ this.paginateLeft } /> }
+              { games.length < 20 ? null : <ArrowCircleRightOutlined onClick={ this.paginateRight } /> }
+            </div>
+          </div>
+
+          <div className='games'>
+            { games?.map( ( game: { id:number, background_image:string } ) => { 
+              return (
+                <GamesParallax 
+                  key={ game.id } 
+                  game={ game } 
+                  offsetY={ offsetY }
+                  scrolling={ scrolling }
+                />
+              );
+            } ) }
           </div>
         </div>
 
-        <div className='games'>
-          { games?.map( ( game: { id:number, background_image:string } ) => { 
-            return (
-              <GamesParallax 
-                key={ game.id } 
-                game={ game } 
-                offsetY={ offsetY }
-                scrolling={ scrolling }
-              />
-            );
-          } ) }
-        </div>
-
         <iframe ref={ this.iframeData } name='search_iframe' style={{ display: 'none' }} />
-      </div>
+      </>
     );
   }
 }
