@@ -1,7 +1,19 @@
 
-// ***CRITICAL*** move RAWG API request to .php, so we can hide API key from the client.
-// We can accomplish this by sending the state information to .php through an action, so we know which data and page to fetch from the backend.
-// set a cookie in .php, so the information is available for the frontend to display on request.
+/* 
+  TODO: create a drop-down filter within our search
+  INCLUDE:
+    - checkbox to toggle between parallax/default grid.
+    - filter select drop-down with these options:
+      + games
+      + creator-roles
+      + creators
+      + developers
+      + genres
+      + platforms
+      + publishers
+      + stores
+      + tags
+*/
 
 import React from 'react';
 import { Component } from 'react';

@@ -1,8 +1,9 @@
 
 #search_count {
-    width: 25%;
-    float: right;
+    position: fixed;
     text-align: left;
+    width: 25%;
+    right: 17px;
 
     @include breakpoint_max( $small_screen ) {
         display: none;
