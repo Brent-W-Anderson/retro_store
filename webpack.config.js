@@ -23,7 +23,8 @@ module.exports = {
         { from: './src/index.php' },
         { from: './src/components/pages/search/search.php', to: 'PHP' },
         { from: './RAWG_KEY.php', to: 'PHP' },
-        { from: './src/components/_assets', to: 'assets' }
+        { from: './src/components/_assets', to: 'assets' },
+        { from: './src/components/pages/login/login.php', to: 'PHP' }
       ]
     })
   ],
