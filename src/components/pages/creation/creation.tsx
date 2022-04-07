@@ -69,7 +69,7 @@ export default class Creation extends Component {
                     <label> Enter Username: </label>
                     <input 
                         type='text'
-                        name='login_username'
+                        name='username'
                         value={ username }
                         onChange={ this.handleUsername }
                     />
