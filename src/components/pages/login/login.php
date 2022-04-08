@@ -8,43 +8,54 @@
 
 if( $_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "retro";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $retro);
+  $login = $_POST['login_username'];
+  $password = $_POST['login_password'];
 
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected Successfully";
+  
+  if (!$login || !$password) {
+    echo '<p>You did not enter login information</p>';
+  }
 
-// db interaction
-$login = $_POST['login_username'];
-$password = $_POST['login_password'];
+  @$db = new mysqli('localhost', 'root', '');
+
+  // Check connection
+  if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+  }
+  echo "Connected Successfully";
+
+$db->select_db('retro');
+  
+
+$query = 'SELECT * FROM customer';
 
 //Need to set db up with Users in order for this to verify if they exist
-$search_user = "SELECT login, password FROM Users";
-$result = $conn->query($search_user);
+//$result = $db -> query($query);
 
-if($result->num_rows > 0) {
-    //output of data for testing
-    echo "customer_id " . $row["customer_id"]. " - username " . $row["username"]. "<br>";
+$result = mysqli_query($db, $query);
+
+if (mysqli_num_rows($result) > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo 'username: ' .$row['username']. "<br>";
+  }
 } else {
-echo "failed test";
+  echo "failed to produce results from db";
 }
+
+
+
+
 
 
 //throwing some test data just to see if this works, delete later and turn into user account info return XXXX
-$testdata = 'test successful';
+//$testdata = 'test successful';
 
-echo '<pre id="user_info">'.$testdata.'</pre>';
+//echo '<pre id="user_info">'.$testdata.'</pre>';
 
 // Closes the connection to the db
-$conn->close();
+$db->close();
 
 }
 

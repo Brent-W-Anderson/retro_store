@@ -86,7 +86,8 @@ export default class Login extends Component {
             ref={ this.formAction }
             onClick={this.handleSubmit}
             method='POST'
-            action='.PHP/login.php'
+            action='index.php'
+            
 
             >
                 <fieldset>
