@@ -72,7 +72,7 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
   }
 
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
-  search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
+  search = ( e:React.KeyboardEvent<HTMLInputElement> ) => {
     const { searchVal, searchChanged } = this.state;
 
     if( e.key === 'Enter' && searchVal.length >= 3 ) {
