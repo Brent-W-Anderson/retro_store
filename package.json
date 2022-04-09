@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "reset": "rm -rf dist",
     "bundle": "webpack",
     "url": "start http://projects/retro_store/dist/",
     "start": "yarn url | yarn bundle --watch"
