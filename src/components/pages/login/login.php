@@ -13,26 +13,54 @@
       echo '<pre id="login_data"> You did not enter login information. </pre>';
     }
     else {
+
+
+      // Database stuff
+      @$db = new mysqli('localhost', 'root', '', 'retro');
+      @$db = mysqli_connect('localhost,', 'root', '', 'retro');
+          if (mysqli_connect_errno()) {
+            echo '<pre id="login_data" Database connection failed';
+            exit;
+          }
+
+
+      $query = 'SELECT login FROM customer';
+      $stmt = $db -> prepare($query);
+      $stmt->execute();
+          $stmt->bind_result($login, $password);
+          $num_results = mysqli_num_rows($result);
+          while($stmt->fetch()) {
+            echo 'pre id="login_data"> Username: '.$login.' </pre>';
+          }
+      
+
+
+
+
+      // Closes the db
+      $db->close();
+
+
+
+
       echo '<pre id="login_data"> welcome to RETRO-RETRO: '.$login.' </pre>';
+
     }
 
-/*
-    @$db = new mysqli('localhost', 'root', '');
+
+  }
+
+
 
     // Check connection
-    if ($db->connect_error) {
-      die("Connection failed: " . $db->connect_error);
-      mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    }
-    echo "Connected Successfully";
-
+    /*
+    //not sure if needed
     $db->select_db('retro');
       
     $query = 'SELECT * FROM customer';
-*/
-    //Need to set db up with Users in order for this to verify if they exist
+
     //$result = $db -> query($query);
-/*
+
     $result = mysqli_query($db, $query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -42,16 +70,8 @@
     } else {
       echo "failed to produce results from db";
     }
-*/
 
-    //throwing some test data just to see if this works, delete later and turn into user account info return XXXX
-    //$testdata = 'test successful';
+ */
 
-    //echo '<pre id="user_info">'.$testdata.'</pre>';
-
-    // Closes the connection to the db
-    // $db->close();
-
-  }
 
 ?> 
