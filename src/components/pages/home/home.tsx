@@ -1,8 +1,8 @@
 
 import { Component } from 'react';
-import "~slick-carousel/slick/slick.css"; 
-import "~slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
 
 const photos = [
   {
@@ -79,7 +79,7 @@ export default class HomePage extends Component {
         </div>
         <div className='featured' id='slides' style={{padding: 24}}>
          <h3>Featured Games</h3>
-         <Slider {...settings}>
+         {/* <Slider {...settings}>
          {photos.map(photo) => {
           return(
             <div>
@@ -88,7 +88,7 @@ export default class HomePage extends Component {
 
           )
          })} 
-         </Slider>
+         </Slider> */}
         </div>
       </div>
     );

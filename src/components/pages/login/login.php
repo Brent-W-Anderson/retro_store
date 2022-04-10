@@ -10,37 +10,28 @@
     $login = $_POST['login_username'];
     $password = $_POST['login_password'];
 
-    if (!$login || !$password) { // this is a little redundant to have because we are also going to check within the DB if a username or password exists
+    if (!$login || !$password) {
       echo '<pre id="login_data"> You did not enter login information. </pre>';
     }
     else {
-      // Database stuff ( don't just say "Database stuff" ) -- this looks more like you're establishing a connection locally, be more specific
-      @$db = new mysqli('localhost', 'root', '', 'retro');
-      @$db = mysqli_connect('localhost,', 'root', '', 'retro');
-
-      // why did this connect_error fail? this doesn't provide you with much information if you're trying to see what the error was.
-      if ( mysqli_connect_errno() ) {
-        echo '<pre id="login_data" Database connection failed';
-        exit;
-      };
-
-      // leave yourself some notes here to describe what you're doing
-      $query = 'SELECT login FROM customer'; // why is a query wrapped in a string? Is this how it's supposed to be?
-      $stmt = $db -> prepare($query); // what does prepare do?
-      $stmt->execute();
-      $stmt->bind_result($login, $password);
-      $num_results = mysqli_num_rows($result);
-
-      // why would we need a while loop here?
-      while( $stmt->fetch() ) {
-        echo 'pre id="login_data"> Username: '.$login.' </pre>';
-      };
-
-      // Closes the db
-      $db->close();
-
-      // return data to frontend
-      echo '<pre id="login_data"> welcome to RETRO-RETRO: '.$login.' </pre>';
+      $host = 'localhost';
+      $user = 'root';
+      $pass = 'password';
+      $db = 'retro_db';
+  
+      $con=new mysqli($host,$user,$pass,$db); // making our connection to the database
+  
+      if( $con->connect_errno ) { // if there's an error:
+          echo '<script> console.error( "failed to connect: '.$con->connect_errno.'" ); </script>';
+      }
+      else {
+          $query = mysqli_query( $con, 'SELECT user_name FROM users' ); // grabbing all of the usernames in the database
+  
+          echo '<script> console.warn( "usernames:" ) </script>';
+          while( $rows = mysqli_fetch_array( $query ) ) { // if another row exists, keep outputting the data.
+              echo '<script> console.warn( "'.$rows[ 0 ].'" ); </script>'; // output ( don't send to the frontend because we just need to check if it exists ).
+          }
+      }
     }
   }
 ?> 
