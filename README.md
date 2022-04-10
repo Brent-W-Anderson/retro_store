@@ -16,3 +16,7 @@
 
   ## RAWG API:
   ### create your own api key here: https://rawg.io/apidocs and create a file specifically named ```RAWG_KEY.php``` at the root of the project. add ```$RAWG_KEY=""``` with your specific key within the quotes. Start the project and you should be good to go!
+## Added a new dependecy for carousel ## 
+```yarn add react-slick``` OR ```npm install react-slick --save```
+AND 
+```npm install slick-carousel --save```
