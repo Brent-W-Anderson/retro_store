@@ -16,7 +16,10 @@
 
   ## RAWG API:
   ### create your own api key here: https://rawg.io/apidocs and create a file specifically named ```RAWG_KEY.php``` at the root of the project. add ```$RAWG_KEY=""``` with your specific key within the quotes. Start the project and you should be good to go!
-## Added a new dependecy for carousel ## 
-```yarn add react-slick``` OR ```npm install react-slick --save```
-AND 
-```npm install slick-carousel --save```
+
+  ## DEPLOYING TO HEROKU:
+  ### create a new local git repo within dist: ```git init```
+  ### stage all of the files: ```git add .```
+  ### commit with a message: ```git commit -m "..message here.."```
+  ### create a server with heroku to deploy at: ```heroku create -a retro-retro```
+  ### push up those changes: ```git push heroku <branch>``` (<branch> can be main, master, whatever branch you're currently on within dist)
