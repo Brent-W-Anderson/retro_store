@@ -13,7 +13,6 @@ export default class Login extends Component {
         phone: '',
         address: '',
         birthday: '',
-        account: [],
         display: 'login'
     }
 
