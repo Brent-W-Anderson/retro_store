@@ -47,11 +47,14 @@
     
     .slides .slick-next {
       right: 5%;
+    } 
+
+    .featured {
+      img {
+        margin: auto;
+        display: block;
+        height: 200px;
+      }
     }
-    
-
-
-
-    
 }
 
