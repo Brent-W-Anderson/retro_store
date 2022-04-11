@@ -9,10 +9,10 @@ export default class Login extends Component {
         username: '',
         password: '',
         email: '',
-        name: '',
+        fullname: '',
         phone: '',
         address: '',
-        birthday: '',
+        birthdate: '',
         display: 'login'
     }
 
@@ -97,7 +97,7 @@ export default class Login extends Component {
 
     handleName = ( e:React.ChangeEvent<HTMLInputElement> ) => {
         this.setState({
-            name: e.target.value
+            fullname: e.target.value
         });
     }
 
@@ -113,9 +113,9 @@ export default class Login extends Component {
         });
     }
 
-    handleBirthday = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+    handleBirthdate = ( e:React.ChangeEvent<HTMLInputElement> ) => {
         this.setState({
-            birthday: e.target.value
+            birthdate: e.target.value
         });
     }
 
@@ -190,7 +190,7 @@ export default class Login extends Component {
     }
 
     showRegisterAccount = () => {
-        const { username, password, email, name, phone, address, birthday, display } = this.state;
+        const { username, password, email, fullname, phone, address, birthdate, display } = this.state;
 
         if( display === 'create' ) {
             return (
@@ -221,7 +221,7 @@ export default class Login extends Component {
                             <label> Password: </label>
                             <input 
                                 type='text'
-                                name='login_password'
+                                name='password'
                                 value={ password }
                                 onChange={ this.handleNewPassword }
                                 required
@@ -243,8 +243,8 @@ export default class Login extends Component {
                             <label> Full Name: </label>
                             <input 
                                 type='text'
-                                name='fname'
-                                value={ name }
+                                name='fullname'
+                                value={ fullname }
                                 onChange={ this.handleName }
                                 required
                             />
@@ -276,9 +276,9 @@ export default class Login extends Component {
                             <label> Birthday: </label>
                             <input 
                                 type='text'
-                                name='birthday'
-                                value={ birthday }
-                                onChange={ this.handleBirthday }
+                                name='birthdate'
+                                value={ birthdate }
+                                onChange={ this.handleBirthdate }
                                 required
                             />
                         </fieldset>
