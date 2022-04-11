@@ -6,7 +6,7 @@ import Header from './header/header';
 import HomePage from './pages/home/home';
 import SearchPage from './pages/search/search';
 import Login from './pages/login/login';
-import Creation from './pages/creation/creation';
+import Account from './pages/account/account';
 
 // styling
 import './app.scss';
@@ -75,7 +75,7 @@ export default class App extends Component {
           { activePage === 'home' ? <HomePage /> : null }
           { activePage === 'search' ? <SearchPage offsetY={ offsetY } scrolling={ scrolling } /> : null }
           { activePage === 'login' ? <Login /> : null}
-          { activePage === 'creation' ? <Creation/> : null}
+          { activePage === 'account' ? <Account/> : null}
         </div>
       </div>
     );
