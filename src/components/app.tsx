@@ -16,7 +16,8 @@ export default class App extends Component {
     activePage: 'home',
     offsetY: 0,
     scrolling: false,
-    sidebarOpen: false
+    sidebarOpen: false,
+    accountInfo: null
   }
 
   componentDidMount = () => {
@@ -51,12 +52,19 @@ export default class App extends Component {
   }
 
   selectActivePage = ( selectedPage:string ) => {
-    this.setState({
-      activePage: selectedPage
-    });
+    const { accountInfo } = this.state;
 
-    var tt0 = document.getElementsByTagName('title');
-    tt0[ 0 ].innerHTML = `retro store - ${ selectedPage }`; 
+    if( selectedPage === 'account' && accountInfo === null ) {
+      // do nothing..
+    }
+    else {
+      this.setState({
+        activePage: selectedPage
+      });
+
+      var tt0 = document.getElementsByTagName('title');
+      tt0[ 0 ].innerHTML = `retro store - ${ selectedPage }`; 
+    }
   }
 
   render() {
