@@ -13,7 +13,7 @@ import './app.scss';
 
 export default class App extends Component {
   state = {
-    activePage: 'home',
+    activePage: 'login',
     offsetY: 0,
     scrolling: false,
     sidebarOpen: false
