@@ -7,6 +7,7 @@ import HomePage from './pages/home/home';
 import SearchPage from './pages/search/search';
 import Login from './pages/login/login';
 import Account from './pages/account/account';
+import Forum from './pages/forum/forum';
 
 // styling
 import './app.scss';
@@ -84,6 +85,7 @@ export default class App extends Component {
           { activePage === 'search' ? <SearchPage offsetY={ offsetY } scrolling={ scrolling } /> : null }
           { activePage === 'login' ? <Login /> : null}
           { activePage === 'account' ? <Account/> : null}
+          { activePage === 'forum' ? <Forum/> : null}
         </div>
       </div>
     );

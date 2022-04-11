@@ -17,10 +17,10 @@ export default class Header extends Component<{ activePage:string, selectActiveP
           </h1>
 
           <ul className='sidebar'>
-            <li className='link inactive'>
-              <h2>
+          <li className={`link${ activePage === 'forum' ? ' selected' : '' }`}>
+              <h2 onClick={ () => selectActivePage( 'forum' ) } >
                 <AddLink />
-                <span> LINK </span>
+                <span> Forum </span>
               </h2>
             </li>
 

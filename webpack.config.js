@@ -26,7 +26,8 @@ module.exports = {
         { from: './RAWG_KEY.php', to: 'PHP' },
         { from: './src/components/_assets', to: 'assets' },
         { from: './src/components/pages/login/login.php', to: 'PHP' },
-        { from: './src/components/pages/account/account.php', to: 'PHP' }
+        { from: './src/components/pages/account/account.php', to: 'PHP' },
+        { from: './src/components/pages/forum/forum.php', to: 'PHP' }
 
       ]
     })

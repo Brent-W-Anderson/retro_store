@@ -22,4 +22,5 @@
   include "./PHP/search.php";
   include "./PHP/login.php";
   include "./PHP/account.php";
+  include "./PHP/forum.php";
 ?>
