@@ -24,19 +24,21 @@
 
         .toggle_display {
             position: absolute;
+            user-select: none;
 
             li {
                 cursor: pointer;
                 float: left;
                 list-style: none;
                 text-shadow: none;
-                color: $color_black;
+                background: $color_black;
+                color: $color_white;
                 padding: 5px 10px;
 
                 &.selected {
                     cursor: default;
-                    background: $color_black;
-                    color: $color_white;
+                    background: $color_white;
+                    color: $color_black;
                 }
             }
         }
