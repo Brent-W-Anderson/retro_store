@@ -21,6 +21,7 @@
     "@types/react-slick": "^0.23.8",
     "copy-webpack-plugin": "^10.2.1",
     "devtools-detect": "^4.0.0",
+    "dotenv-webpack": "^7.1.0",
     "node": "^17.7.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -22,9 +22,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: './src/index.php' },
-        { from: './composer.json' },
         { from: './src/components/pages/search/search.php', to: 'PHP' },
-        { from: './RAWG_KEY.php', to: 'PHP' },
         { from: './src/components/_assets', to: 'assets' },
         { from: './src/components/pages/login/login.php', to: 'PHP' },
         { from: './src/components/pages/account/account.php', to: 'PHP' },
