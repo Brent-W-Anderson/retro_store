@@ -283,7 +283,7 @@ export default class Login extends Component {
                             />
                         </fieldset>
     
-                        <fieldset>
+                        <fieldset className='button'>
                             <button 
                                 type='submit'
                                 onClick={ this.handleSubmit }

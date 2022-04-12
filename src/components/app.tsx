@@ -1,6 +1,9 @@
 
 import { Component } from 'react';
 
+// API
+import RAWG from './RAWG/RAWG';
+
 // components
 import Header from './header/header';
 import HomePage from './pages/home/home';
@@ -15,6 +18,14 @@ import './app.scss';
 export default class App extends Component {
   state = {
     activePage: 'home',
+    searchPage: {
+      games: {
+        count: 0,
+        results: []
+      },
+      searchVal: '',
+      pageNum: 1
+    },
     offsetY: 0,
     scrolling: false,
     sidebarOpen: false,
@@ -68,8 +79,32 @@ export default class App extends Component {
     }
   }
 
+  updateSearchVal = ( searchVal:string ) => {
+    const { searchPage } = this.state;
+
+    this.setState({
+      searchPage: {
+        searchVal: searchVal,
+        games: searchPage.games,
+        pageNum: searchPage.pageNum
+      }
+    });
+  }
+
+  makeSearch = async ( pageNum:number ) => {
+    const { searchVal } = this.state.searchPage;
+
+    this.setState({
+      searchPage: {
+        searchVal: searchVal,
+        games: await RAWG( searchVal, pageNum ),
+        pageNum: pageNum
+      }
+    });
+  }
+
   render() {
-    const { activePage, offsetY, scrolling, sidebarOpen } = this.state;
+    const { activePage, offsetY, scrolling, sidebarOpen, searchPage } = this.state;
 
     return (
       <div className='app'>
@@ -82,7 +117,13 @@ export default class App extends Component {
 
         <div className='pages' onScroll={ this.handleScrollOffset }>
           { activePage === 'home' ? <HomePage /> : null }
-          { activePage === 'search' ? <SearchPage offsetY={ offsetY } scrolling={ scrolling } /> : null }
+          { activePage === 'search' ? 
+            <SearchPage
+              searchPage={ searchPage }
+              updateSearchVal={ this.updateSearchVal }
+              makeSearch={ this.makeSearch }
+              offsetY={ offsetY }
+              scrolling={ scrolling } /> : null }
           { activePage === 'login' ? <Login /> : null}
           { activePage === 'account' ? <Account/> : null}
           { activePage === 'forum' ? <Forum/> : null}

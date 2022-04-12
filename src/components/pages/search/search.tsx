@@ -1,64 +1,59 @@
 
-// ***CRITICAL*** move RAWG API request to .php, so we can hide API key from the client.
-// We can accomplish this by sending the state information to .php through an action, so we know which data and page to fetch from the backend.
-// set a cookie in .php, so the information is available for the frontend to display on request.
-
 import { Component } from 'react';
 import { Search, ArrowCircleLeftOutlined, ArrowCircleRightOutlined } from '@mui/icons-material';
-
-// API
-import RAWG from '../../RAWG/RAWG';
 
 // components
 import GamesParallax from '../../gamesParallax/gamesParallax';
 
-export default class SearchPage extends Component<{ offsetY:number, scrolling:boolean }> {
-  state = {
-    games: [],
-    searchVal: '',
-    pageNum: 1
-  }
+type SearchProps = {
+  searchPage: {
+    games: {
+      count:number,
+      results:{ id:number, background_image:string }[]
+    },
+    searchVal:string,
+    pageNum:number
+  },
+  offsetY:number,
+  scrolling:boolean,
+  updateSearchVal:Function,
+  makeSearch:Function
+}
 
+export default class SearchPage extends Component<SearchProps> {
   updateSearchVal = ( e:React.ChangeEvent<HTMLInputElement> ) => {
-    this.setState({ searchVal: e.target.value });
+    const { updateSearchVal } = this.props;
+
+    updateSearchVal( e.target.value );
   }
 
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
-    const { searchVal } = this.state;
+    const { makeSearch } = this.props;
 
     if( e.key === 'Enter' ) {
-      this.setState({ 
-        games: await RAWG( searchVal, 1 ),
-        pageNum: 1
-      });
+      makeSearch( 1 );
     }
   }
 
   paginateLeft = async () => {
-    const { searchVal, pageNum } = this.state;
+    const { searchPage, makeSearch } = this.props;
 
-    if( pageNum > 1 ) {
-      this.setState({
-        games: await RAWG( searchVal, pageNum - 1 ),
-        pageNum: pageNum - 1
-      });
+    if( searchPage.pageNum > 1 ) {
+      makeSearch( searchPage.pageNum - 1 );
     }
   }
 
   paginateRight = async () => {
-    const { games, searchVal, pageNum } = this.state;
+    const { searchPage, makeSearch } = this.props;
 
-    if( games.length === 20 ) {
-      this.setState({
-        games: await RAWG( searchVal, pageNum + 1 ),
-        pageNum: pageNum + 1
-      });
+    if( searchPage.games.results.length === 20 ) {
+      makeSearch( searchPage.pageNum + 1 );
     }
   }
 
   render() {
-    const { games, searchVal, pageNum } = this.state;
+    const { games, searchVal, pageNum } = this.props.searchPage;
     const { offsetY, scrolling } = this.props;
 
     return (
@@ -76,12 +71,12 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
 
           <div className='pagination_arrows'>
             { pageNum > 1 ? <ArrowCircleLeftOutlined onClick={ this.paginateLeft } /> : null }
-            { games.length === 20 ? <ArrowCircleRightOutlined onClick={ this.paginateRight } /> : null }
+            { games.results.length === 20 ? <ArrowCircleRightOutlined onClick={ this.paginateRight } /> : null }
           </div>
         </div>
 
         <div className='games'>
-          { games?.map( ( game: { id:number, background_image:string } ) => { 
+          { games?.results.map( ( game: { id:number, background_image:string } ) => { 
             return (
               <GamesParallax 
                 key={ game.id } 

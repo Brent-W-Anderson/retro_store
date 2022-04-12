@@ -13,7 +13,7 @@ export default async function RAWG( param:string, pageNum:number, filter?:string
         const data = await fetch( url + search + key + searchParam + page + page_size )
         .then( response => response.json() )
         .then( data => {
-            return data.results;
+            return data;
         } )
         .catch( error => {
             throw( 'ERROR: RAWG failed to fetch: ' + error );

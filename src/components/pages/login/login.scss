@@ -64,27 +64,31 @@
                 color: $color_black;
             }
 
-            button {
-                cursor: pointer;
-                width: fit-content;
-                border: 1px solid transparent;
-                font-weight: bold;
-                padding: 0 10px;
-                letter-spacing: 1px;
-                border-radius: 5px;
-                background: $color_black;
-                color: $color_white;
-
-                &:active {
-                    border: 1px solid $color_black;
-                    background: $color_white;
-                    color: $color_black;
+            &.button {
+                justify-content: end;
+                
+                button {
+                    cursor: pointer;
+                    width: fit-content;
+                    border: 1px solid transparent;
+                    font-weight: bold;
+                    padding: 0 10px;
+                    letter-spacing: 1px;
+                    border-radius: 5px;
+                    background: $color_black;
+                    color: $color_white;
+    
+                    &:active {
+                        border: 1px solid $color_black;
+                        background: $color_white;
+                        color: $color_black;
+                    }
                 }
             }
-        }
-
-        p {
-            color: $color_black;
-        }
+    
+            p {
+                color: $color_black;
+            }
+            }
     }
 }
