@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 export default class Forum extends Component {
     state = {
         message: '',
-        reply: '',
+        updatedmessage: '',
+        replymessage: '',
         username: '',
         game: '',
         display: 'messageboard'
@@ -13,7 +14,7 @@ export default class Forum extends Component {
 
     iframeData = React.createRef<HTMLIFrameElement>();
 
-    checkData = () => {
+    messageCheckData = () => {
         const messageData = this.iframeData.current?.contentWindow?.document.getElementById( 'messageboard_data' );
     
         if( messageData?.textContent && messageData.textContent !== '' ) {
@@ -45,15 +46,36 @@ export default class Forum extends Component {
         return false;
     }
 
-    dataSearch = () => {
+    
+    messageSearch = () => {
         const { username, message, game } = this.state;
 
         if( username !== '' && message !== '' && game !== '') {
             const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
-                if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
+                if( this.messageCheckData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
             }, 250 );
         }
     }
+
+    updateMessageData = () => {
+        const { username, updatedmessage } = this.state;
+
+        if( username !== '' && updatedmessage !== '') {
+            const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
+                if( this.messageCheckData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
+            }, 250 );
+        }
+    }
+    updateReplyData = () => {
+        const { username, replymessage } = this.state;
+
+        if( username !== '' && replymessage !== '') {
+            const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
+                if( this.messageCheckData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
+            }, 250 );
+        }
+    }
+
 
     handleSubmit = () => {
             console.warn( 'Posting info to db ');
@@ -67,7 +89,7 @@ export default class Forum extends Component {
 
     handleReply = (e:React.ChangeEvent<HTMLInputElement> ) => {
         this.setState({
-            reply: e.target.value
+            replymessage: e.target.value
         });
     }
 
@@ -82,6 +104,12 @@ export default class Forum extends Component {
             game: e.target.value
         });
     }
+    handleUpdatedMessage = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        this.setState({
+            updatedmessage: e.target.value
+        });
+    }
+
 
 
 
@@ -98,11 +126,16 @@ export default class Forum extends Component {
                 <li
                     className={ display === 'messageboard' ? 'selected' : '' }
                     onClick={ () => toggle( 'messageboard' ) }
-                > message </li>
+                > Create Post </li>
                 <li
                     className={ display === 'replyboard' ? 'selected' : '' }
                     onClick={ () => toggle( 'replyboard' ) }
-                > reply </li>
+                > Reply </li>
+                <li
+                    className={ display === 'updatedmessage' ? 'selected' : '' }
+                    onClick={ () => toggle( 'updatedmessage' ) }
+                > Update Post </li>
+                
             </ul>
         );
     }
@@ -153,7 +186,7 @@ export default class Forum extends Component {
 
                     <button 
                         type='submit'
-                        onClick={ this.dataSearch }
+                        onClick={ this.messageSearch }
                         value='submit'
                     > Submit </button>
 
@@ -163,19 +196,67 @@ export default class Forum extends Component {
         return null;
 
     }
+
+    showUpdateBoard = () => {
+        const { username, updatedmessage, display } = this.state;
+
+        if( display === 'updatedmessage')
+        return (
+            <form 
+                className='page'
+                method='POST'
+                action='./PHP/forum.php'
+                target='update_iframe'
+                >
+
+                    { this.toggleDisplay() }
+                    <h3> Change a message: </h3>
+                    <fieldset>
+                            <label> Username: </label>
+                            <input 
+                                type='text'
+                                name='username'
+                                value={ username }
+                                onChange={ this.handleUsername }
+                                required
+                            />
+                    </fieldset>
+
+                    <fieldset>
+                        <label> Enter Message: </label>
+                        <input
+                            type='text'
+                            name='updatedmessage'
+                            value={ updatedmessage }
+                            onChange={ this.handleUpdatedMessage }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                            <button 
+                                type='submit'
+                                onClick={ this.updateMessageData }
+                                value='submit'
+                            > Submit </button>
+                    </fieldset>
+            </form>
+        );
+
+        return null;
+
+    }
+    
     showReplyBoard = () => {
-        const { username, message, display } = this.state;
+        const { username, replymessage, display } = this.state;
 
         if( display === 'replyboard')
         return (
             <form 
-                id='reply'
                 className='page'
                 method='POST'
                 action='./PHP/forum.php'
-                target='message_iframe'
-                style={{ gridTemplateColumns: '300px 300px' }}
-                onSubmit={this.handleSubmit}
+                target='reply_iframe'
                 >
 
                     { this.toggleDisplay() }
@@ -196,8 +277,8 @@ export default class Forum extends Component {
                         <label> Enter Message: </label>
                         <input id='reply'
                             type='text'
-                            name='reply'
-                            value={ message }
+                            name='replymessage'
+                            value={ replymessage }
                             onChange={ this.handleReply }
                             required
                         />
@@ -216,13 +297,14 @@ export default class Forum extends Component {
         return null;
 
     }
-
+    
 
     render() {
         return (
             <div id='message_board'>
                 { this.showMessageBoard() }
                 { this.showReplyBoard() }
+                { this.showUpdateBoard() }
                 <iframe ref={ this.iframeData } name='messageboard_iframe' style={{ display: 'none' }} />
             </div>
         );
