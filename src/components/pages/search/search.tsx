@@ -25,17 +25,36 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
 
   // TODO: create drop-down search filter, so we could search by: games, genere, etc..
   search = async ( e:React.KeyboardEvent<HTMLInputElement> ) => {
+    const { searchVal } = this.state;
+
+    if( e.key === 'Enter' ) {
+      this.setState({ 
+        games: await RAWG( searchVal, 1 ),
+        pageNum: 1
+      });
+    }
+  }
+
+  paginateLeft = async () => {
     const { searchVal, pageNum } = this.state;
 
-    if( e.key === 'Enter' ) this.setState({ games: await RAWG( searchVal, pageNum ) });
+    if( pageNum > 1 ) {
+      this.setState({
+        games: await RAWG( searchVal, pageNum - 1 ),
+        pageNum: pageNum - 1
+      });
+    }
   }
 
-  paginateLeft = () => {
-    console.warn( 'left arrow clicked..' );
-  }
+  paginateRight = async () => {
+    const { games, searchVal, pageNum } = this.state;
 
-  paginateRight = () => {
-    console.warn( 'right arrow clicked..' );
+    if( games.length === 20 ) {
+      this.setState({
+        games: await RAWG( searchVal, pageNum + 1 ),
+        pageNum: pageNum + 1
+      });
+    }
   }
 
   render() {
@@ -56,8 +75,8 @@ export default class SearchPage extends Component<{ offsetY:number, scrolling:bo
           <Search />
 
           <div className='pagination_arrows'>
-            <ArrowCircleLeftOutlined onClick={ this.paginateLeft } />
-            <ArrowCircleRightOutlined onClick={ this.paginateRight } />
+            { pageNum > 1 ? <ArrowCircleLeftOutlined onClick={ this.paginateLeft } /> : null }
+            { games.length === 20 ? <ArrowCircleRightOutlined onClick={ this.paginateRight } /> : null }
           </div>
         </div>
 
