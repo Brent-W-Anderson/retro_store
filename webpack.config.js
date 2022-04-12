@@ -1,6 +1,7 @@
 
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   target: 'web',
@@ -28,9 +29,9 @@ module.exports = {
         { from: './src/components/pages/login/login.php', to: 'PHP' },
         { from: './src/components/pages/account/account.php', to: 'PHP' },
         { from: './src/components/pages/forum/forum.php', to: 'PHP' }
-
       ]
-    })
+    }),
+    new Dotenv()
   ],
 
   // loaders
