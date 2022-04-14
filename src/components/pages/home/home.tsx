@@ -61,15 +61,6 @@ export default class HomePage extends Component {
           <h3>Welcome to Retro Retro</h3>
         </div>
 
-        <div className='click-container'>
-          <div className='box' ><a href='link'>On Sale</a></div>
-          <div className='box' >Featured Page</div>
-          <div className='box' >Xbox</div>
-          <div className='box' >Playstation</div>
-          <div className='box' >Nintendo</div>
-          <div className='box' >SEGA/NES</div>
-        </div>
-
         <div className='featured' id='slides' style={{padding: 24}}>
          <h3>Featured Games</h3>
 
@@ -83,6 +74,18 @@ export default class HomePage extends Component {
           })} 
          </Slider>
         </div>
+
+
+
+
+        <div className='click-container'>
+          <div className='box' ><a href='link'>On Sale</a></div>
+          <div className='box' >Featured Page</div>
+          <div className='box' >Guides</div>
+          <div className='box' >Systems</div>
+        </div>
+
+
       </div>
     );
   }
