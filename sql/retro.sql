@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 14, 2022 at 12:42 AM
+-- Generation Time: Apr 16, 2022 at 10:05 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.12
 
@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `phone` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `birthdate` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`Customer_id`)
+  PRIMARY KEY (`username`),
+  KEY `Customer_id` (`Customer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -46,15 +47,15 @@ CREATE TABLE IF NOT EXISTS `customer` (
 --
 
 INSERT INTO `customer` (`Customer_id`, `username`, `password`, `email`, `fullname`, `phone`, `address`, `birthdate`) VALUES
-(1, 'test', 'test1', 'test@place.com', 'testy mctester', '555-565-5555', '555 Place Rd, Minneapolis, MN 55421', '01/01/2000'),
-(2, 'gamer dude', 'games', 'gamer@game.com', 'Gary Gamer', '777-555-6666', '25 MyHome Ln, St. Paul, MN 55123', '01/02/1999'),
-(3, 'nate', 'Games1', 'nate@game.com', 'Nate Gamer', '111-222-3333', '505 Place Ln, Dalbo, MN, 55111', '01/05/1980'),
-(4, 'NewGamer', '', 'gamer@games.com', '', '555-444-6262', '55 Place Way, Minneapolis, MN 55421', '11/11/1999'),
-(11, 'NatesAccount', '', 'nate@game.com', '', '555-555-4545', '2650 Crazy Ave, Bloomington, MN', ''),
-(16, 'JackofAllTrades', '', 'jack@game.com', '', '777-888-5554', '89 Central Lane, Minneapolis, Mn', ''),
 (17, 'BillyPlaysAlot', 'HaloFan', 'Billy@game.com', 'Billy Jackson', '789-785-7858', '7979 PO BOX, Ohio', '05/05/1990'),
-(18, 'TheDudesDude', 'P@ssW0rd', 'Dude@place.com', 'Dude Guy', '789-789-5555', '555 Place Rd, Minneapolis, 55421', '01/01/2001'),
-(19, 'ClassExample', 'Class', 'class@game.com', 'Classy Class', '777-555-5454', '55 Someplace', '8/5/2020');
+(19, 'ClassExample', 'Class', 'class@game.com', 'Classy Class', '777-555-5454', '55 Someplace', '8/5/2020'),
+(2, 'gamer dude', 'games', 'gamer@game.com', 'Gary Gamer', '777-555-6666', '25 MyHome Ln, St. Paul, MN 55123', '01/02/1999'),
+(16, 'JackofAllTrades', '', 'jack@game.com', '', '777-888-5554', '89 Central Lane, Minneapolis, Mn', ''),
+(3, 'nate', 'Games1', 'nate@game.com', 'Nate Gamer', '111-222-3333', '505 Place Ln, Dalbo, MN, 55111', '01/05/1980'),
+(11, 'NatesAccount', '', 'nate@game.com', '', '555-555-4545', '2650 Crazy Ave, Bloomington, MN', ''),
+(4, 'NewGamer', '', 'gamer@games.com', '', '555-444-6262', '55 Place Way, Minneapolis, MN 55421', '11/11/1999'),
+(1, 'test', 'test1', 'test@place.com', 'testy mctester', '555-565-5555', '555 Place Rd, Minneapolis, MN 55421', '01/01/2000'),
+(18, 'TheDudesDude', 'P@ssW0rd', 'Dude@place.com', 'Dude Guy', '789-789-5555', '555 Place Rd, Minneapolis, 55421', '01/01/2001');
 
 -- --------------------------------------------------------
 
@@ -65,25 +66,25 @@ INSERT INTO `customer` (`Customer_id`, `username`, `password`, `email`, `fullnam
 DROP TABLE IF EXISTS `forum`;
 CREATE TABLE IF NOT EXISTS `forum` (
   `forum_id` int(8) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(8) NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` int(8) NOT NULL,
   `message` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`forum_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `game_id` (`game_id`)
+  KEY `game_id` (`game_id`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `forum`
 --
 
-INSERT INTO `forum` (`forum_id`, `customer_id`, `game_id`, `message`) VALUES
-(1, 2, 1, 'Here is an updated message'),
-(2, 17, 3, 'THIS GAME IS HARD! HELP!!!'),
-(3, 17, 2, 'Ez way to beat level 2\r\n\r\nKeep on jumping lol'),
-(4, 1, 1, 'Help on this game'),
-(5, 1, 1, 'I keep getting stuck on the hard part, please help with tips'),
-(7, 1, 1, 'Help, this game is hard');
+INSERT INTO `forum` (`forum_id`, `username`, `game_id`, `message`) VALUES
+(1, 'gamer dude', 1, 'Here is an updated message'),
+(2, 'BillyPlaysAlot', 3, 'THIS GAME IS HARD! HELP!!!'),
+(3, 'BillyPlaysAlot', 2, 'Ez way to beat level 2\r\n\r\nKeep on jumping lol'),
+(4, 'test', 1, 'Help on this game'),
+(5, 'test', 1, 'I keep getting stuck on the hard part, please help with tips'),
+(7, 'test', 1, 'Help, this game is hard');
 
 -- --------------------------------------------------------
 
@@ -121,21 +122,21 @@ INSERT INTO `game` (`game_id`, `name`, `genre`, `description`, `stock`, `price`,
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE IF NOT EXISTS `rating` (
   `rating_id` int(8) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(8) NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` int(8) NOT NULL,
   `value` int(10) NOT NULL,
   PRIMARY KEY (`rating_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `game_id` (`game_id`)
+  KEY `game_id` (`game_id`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `rating`
 --
 
-INSERT INTO `rating` (`rating_id`, `customer_id`, `game_id`, `value`) VALUES
-(1, 4, 1, 8),
-(2, 16, 1, 9);
+INSERT INTO `rating` (`rating_id`, `username`, `game_id`, `value`) VALUES
+(1, 'NewGamer', 1, 8),
+(2, 'JackofAllTrades', 1, 9);
 
 -- --------------------------------------------------------
 
@@ -146,21 +147,21 @@ INSERT INTO `rating` (`rating_id`, `customer_id`, `game_id`, `value`) VALUES
 DROP TABLE IF EXISTS `reply`;
 CREATE TABLE IF NOT EXISTS `reply` (
   `reply_id` int(8) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(8) NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `forum_id` int(8) NOT NULL,
   `reply_message` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`reply_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `forum_id` (`forum_id`)
+  KEY `forum_id` (`forum_id`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `reply`
 --
 
-INSERT INTO `reply` (`reply_id`, `customer_id`, `forum_id`, `reply_message`) VALUES
-(1, 16, 2, 'Have you tried it on easy?'),
-(2, 11, 2, 'This game is hard. But it is so much fun! Try using a lot of health potions');
+INSERT INTO `reply` (`reply_id`, `username`, `forum_id`, `reply_message`) VALUES
+(1, 'JackofAllTrades', 2, 'Have you tried it on easy?'),
+(2, 'NatesAccount', 2, 'This game is hard. But it is so much fun! Try using a lot of health potions');
 
 -- --------------------------------------------------------
 
@@ -171,24 +172,24 @@ INSERT INTO `reply` (`reply_id`, `customer_id`, `forum_id`, `reply_message`) VAL
 DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction` (
   `transaction_id` int(8) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(8) NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` int(8) NOT NULL,
   `quantity` int(8) NOT NULL,
   `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`transaction_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `game_id` (`game_id`)
+  KEY `game_id` (`game_id`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`transaction_id`, `customer_id`, `game_id`, `quantity`, `status`) VALUES
-(1, 11, 1, 1, 'Owned'),
-(2, 11, 2, 1, 'Owned'),
-(3, 17, 1, 1, 'Owned'),
-(4, 16, 3, 1, 'Wish List');
+INSERT INTO `transaction` (`transaction_id`, `username`, `game_id`, `quantity`, `status`) VALUES
+(1, 'NatesAccount', 1, 1, 'Owned'),
+(2, 'NatesAccount', 1, 1, 'Owned'),
+(3, 'BillyPlaysAlot', 1, 1, 'Owned'),
+(4, 'JackofAllTrades', 3, 1, 'Wish List');
 
 --
 -- Constraints for dumped tables
@@ -198,29 +199,29 @@ INSERT INTO `transaction` (`transaction_id`, `customer_id`, `game_id`, `quantity
 -- Constraints for table `forum`
 --
 ALTER TABLE `forum`
-  ADD CONSTRAINT `forum_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`Customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `forum_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `forum_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `forum_ibfk_3` FOREIGN KEY (`username`) REFERENCES `customer` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rating`
 --
 ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`Customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`username`) REFERENCES `customer` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reply`
 --
 ALTER TABLE `reply`
-  ADD CONSTRAINT `reply_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`Customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reply_ibfk_2` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`forum_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `reply_ibfk_2` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`forum_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reply_ibfk_3` FOREIGN KEY (`username`) REFERENCES `customer` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`Customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaction_ibfk_4` FOREIGN KEY (`username`) REFERENCES `customer` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
