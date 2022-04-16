@@ -1,0 +1,20 @@
+
+#store {
+    padding-top: 40px;
+
+    .games-container {
+        display: grid;
+        grid-template-columns: auto, auto, auto;
+        padding: 10px;
+        border-radius: 25px;
+        position: relative;
+    }
+    .box {
+        //width: 30%;
+        //height: auto;
+        //position: relative;
+
+
+    }
+
+}
