@@ -23,4 +23,5 @@
   include "./PHP/login.php";
   include "./PHP/account.php";
   include "./PHP/forum.php";
+  include "./PHP/store.php";
 ?>

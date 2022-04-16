@@ -11,6 +11,7 @@ import SearchPage from './pages/search/search';
 import Login from './pages/login/login';
 import Account from './pages/account/account';
 import Forum from './pages/forum/forum';
+import Store from './pages/store/store';
 
 // styling
 import './app.scss';
@@ -127,6 +128,7 @@ export default class App extends Component {
           { activePage === 'login' ? <Login /> : null}
           { activePage === 'account' ? <Account/> : null}
           { activePage === 'forum' ? <Forum/> : null}
+          { activePage === 'store' ? <Store/> : null}
         </div>
       </div>
     );
