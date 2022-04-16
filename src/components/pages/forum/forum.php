@@ -21,22 +21,6 @@
         // and updates the message
         if ( isset($updatedmessage) && isset($username)) {
         
-            // not needed, holding for now
-        // Returning current posts from customer_id = '2'
-        /*$users_post = $db -> query("SELECT message FROM forum WHERE customer_id = '2'");
-        if(!$users_post) { echo mysqli_error($db);}
-
-            if ($users_post->num_rows > 0) {
-                // output data of username/password that was matched in database
-                while($row = $users_post->fetch_assoc()) {
-                    echo '<pre id="user_post"> User Posts: ' . $row["message"]. "<br>";
-                }
-            } else {
-                echo "0 results";
-            }
-        */
-
-
         // Updates post
         //$post_update = "UPDATE forum SET message = '$updatedmessage' WHERE customer_id = '2'";
         $update_post = $db -> query("UPDATE forum SET message = '$updatedmessage' WHERE customer_id = '2'");
@@ -57,7 +41,7 @@
         if( isset($replymessage) && isset($username)) {
             // this will be where the logic for posting message will go
 
-            
+
 
         }
 

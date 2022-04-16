@@ -25,6 +25,7 @@
         .toggle_display {
             position: absolute;
             user-select: none;
+            display: grid;
 
             li {
                 cursor: pointer;

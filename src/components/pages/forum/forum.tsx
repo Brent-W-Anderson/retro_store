@@ -112,7 +112,6 @@ export default class Forum extends Component {
 
 
 
-
     toggleDisplay = () => {
         const { display } = this.state;
         const that = this;
@@ -302,10 +301,10 @@ export default class Forum extends Component {
     render() {
         return (
             <div id='message_board'>
-                { this.showMessageBoard() }
-                { this.showReplyBoard() }
-                { this.showUpdateBoard() }
-                <iframe ref={ this.iframeData } name='messageboard_iframe' style={{ display: 'none' }} />
+                {this.showMessageBoard()}
+                {this.showReplyBoard()}
+                {this.showUpdateBoard()}
+                <iframe ref={this.iframeData} name='messageboard_iframe' style={{ display: 'none' }} />
             </div>
         );
     }
