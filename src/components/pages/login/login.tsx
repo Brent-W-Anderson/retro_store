@@ -302,8 +302,8 @@ export default class Login extends Component {
             <div id='login_create'>
                 { this.showRegisterAccount() }
                 { this.showLogin() }
-                <div className ='account_info'> { /* fill this with output formatting with data from php file */ } </div>
-                <iframe ref={ this.iframeData } name='login_iframe' style={{ display: 'none' }} />
+                <div className ='account_info'> { /* this is where specicic styles will go */ } </div>
+                <iframe ref={ this.iframeData } name='login_iframe' style={{ display: 'grid' }} />
             </div>
         );
     }
