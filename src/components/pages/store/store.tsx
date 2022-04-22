@@ -16,10 +16,10 @@ export default class Store extends Component {
             username: e.target.value
         });
     }
-    handlePurchase = ( e:React.ChangeEvent<HTMLInputElement> ) => {
-        this.setState({
-            game: e.target.value
-        });
+    handlePurchase = () => {
+
+           console.log(this.state);
+
     }
 
 
@@ -118,14 +118,14 @@ export default class Store extends Component {
         </fieldset>
 
         <fieldset>
-            <label> Password: </label>
-            <input id='game'
-                type='text'
-                name='game'
-                value={ game }
-                onChange={ this.handlePurchase }
-                required
-            />
+            <label> Game: </label>
+            <select name='game' id='game'>
+                <option value='Halo'>Halo</option>
+                <option value='Cuphead'>Cuphead</option>
+                <option value='Elden Ring'>Elden Ring</option>
+
+            </select>
+            
         </fieldset>
 
         <button 
