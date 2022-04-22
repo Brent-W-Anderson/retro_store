@@ -23,33 +23,27 @@
     };
       
     // Statements for interaction with the DB
-    //Check if user already exists via Username, email.
-    // Working to set up so the db does the work of validating the user
-    /*
-    $user_verify = $db -> query("IF NOT EXISTS ( BEGIN
-                                                  SELECT username, email FROM customer 
-                                                  WHERE username = '$username' 
-                                                  AND email = '$email'
-                                                  
-                                                  BEGIN
-                                                    INSERT INTO customer (username, password, email, fullname, phone, address, birthdate)
-                                                    VALUES ('$username', '$password', '$email', '$fullname', '$phone',
-                                                            '$address', '$birthdate')
-                                                  END
-                                                  END");
-      */
+    $user_verify = $db -> query("SELECT username FROM customer WHERE username = '$username'");
 
+    if($user_verify->num_rows == 0) {
 
-    //Insert Record into DB
-    $insert_user = "INSERT INTO customer (username, password, email, fullname, phone, address, birthdate)
-    VALUES ('$username', '$password', '$email', '$fullname', '$phone',
-            '$address', '$birthdate')";
-    // Inserts the user into the db, if success prints success
-    if( $db -> query($insert_user) === TRUE) {
-        echo '<pre id="login_data"> User succesfully added ';
-    } else {
-        echo 'Error: ' .$sql. '<br>' .mysqli_error($db);
+      $insert_user = "INSERT INTO customer (username, password, email, fullname, phone, address, birthdate)
+      VALUES ('$username', '$password', '$email', '$fullname', '$phone',
+              '$address', '$birthdate')";
+      // Inserts the user into the db, if success prints success
+      if( $db -> query($insert_user) === TRUE) {
+          echo "User succesfully added ";
+      } else {
+          echo "Error: " .$sql. "<br>" .mysqli_error($db);
+      }
+
     }
+    else {
+      echo "Username is taken! Try again!";
+    }
+    
+    
+
     
 
       // Closes the db
