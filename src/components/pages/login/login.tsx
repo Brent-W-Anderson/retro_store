@@ -4,16 +4,37 @@ import { Component } from 'react';
 
 export default class Login extends Component { 
     state = {
-        login_username: '',
-        login_password: '',
-        username: '',
-        password: '',
-        email: '',
-        fullname: '',
-        phone: '',
-        address: '',
-        birthdate: '',
-        display: 'login'
+        display: 'login',
+        frontend: {
+            login: {
+                username: '',
+                password: ''
+            },
+            create: {
+                username: '',
+                password: '',
+                email: '',
+                fname: '',
+                lname: '',
+                phone: '',
+                address: ''
+            }
+        },
+        data: {
+            login: {
+                username: '',
+                password: ''
+            },
+            create: {
+                username: '',
+                password: '',
+                email: '',
+                fname: '',
+                lname: '',
+                phone: '',
+                address: ''
+            }
+        }
     }
 
     iframeData = React.createRef<HTMLIFrameElement>();
@@ -38,7 +59,7 @@ export default class Login extends Component {
     
            if( txtJson.results ) {
 
-                console.warn( loginData.textContent ); // this is the data coming back from login.php
+                console.warn( txt ); // this is the data coming back from login.php
                 this.setState({
                     account: txtJson.results
                 });
@@ -52,9 +73,9 @@ export default class Login extends Component {
     }
 
     dataSearch = () => {
-        const { login_username, login_password } = this.state;
+        const { username, password } = this.state.data.login;
 
-        if( login_username !== '' && login_password !== '' ) {
+        if( username !== '' && password !== '' ) {
             const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
                 if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
             }, 250 );
@@ -62,60 +83,281 @@ export default class Login extends Component {
     }
 
     handleUsername = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            login_username: e.target.value
+            frontend: {
+                login: {
+                    username: e.target.value,
+                    password: frontend.login.password
+                },
+                create: frontend.create
+            },
+            data: {
+                login: {
+                    username: e.target.value,
+                    password: data.login.password
+                },
+                create: data.create
+            }
         });
     }
 
     handlePassword = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            login_password: e.target.value
+            frontend: {
+                login: {
+                    username: frontend.login.username,
+                    password: e.target.value
+                },
+                create: frontend.create
+            },
+            data: {
+                login: {
+                    username: data.login.username,
+                    password: e.target.value
+                },
+                create: data.create
+            }
         });
     }
 
-
-    // for account creation part
-    handleSubmit = () => {
-        console.warn( 'sending the form to db... soon' );
-    }
     handleNewUsername = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            username: e.target.value
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: e.target.value,
+                    password: frontend.create.password,
+                    email: frontend.create.email,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: frontend.create.phone,
+                    address: frontend.create.address
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: e.target.value,
+                    password: data.create.password,
+                    email: data.create.email,
+                    fname: data.create.fname,
+                    lname: data.create.lname,
+                    phone: data.create.phone,
+                    address: data.create.address
+                }
+            }
         });
     }
+
     handleNewPassword = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            password: e.target.value
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: e.target.value,
+                    email: frontend.create.email,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: frontend.create.phone,
+                    address: frontend.create.address
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: e.target.value,
+                    email: data.create.email,
+                    fname: data.create.fname,
+                    lname: data.create.lname,
+                    phone: data.create.phone,
+                    address: data.create.address
+                }
+            }
         });
     }
 
     handleEmail = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            email: e.target.value
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: frontend.create.username,
+                    password: frontend.create.password,
+                    email: e.target.value,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: frontend.create.phone,
+                    address: frontend.create.address
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: data.create.password,
+                    email: e.target.value,
+                    fname: data.create.fname,
+                    lname: data.create.lname,
+                    phone: data.create.phone,
+                    address: data.create.address
+                }
+            }
         });
     }
 
-    handleName = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+    handleFName = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            fullname: e.target.value
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: frontend.create.username,
+                    password: frontend.create.password,
+                    email: frontend.create.email,
+                    fname: e.target.value,
+                    lname: frontend.create.lname,
+                    phone: frontend.create.phone,
+                    address: frontend.create.address
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: data.create.password,
+                    email: data.create.email,
+                    fname: e.target.value,
+                    lname: data.create.lname,
+                    phone: data.create.phone,
+                    address: data.create.address
+                }
+            }
+        });
+    }
+
+    handleLName = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
+        this.setState({
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: frontend.create.username,
+                    password: frontend.create.password,
+                    email: frontend.create.email,
+                    fname: frontend.create.fname,
+                    lname: e.target.value,
+                    phone: frontend.create.phone,
+                    address: frontend.create.address
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: data.create.password,
+                    email: data.create.email,
+                    fname: frontend.create.fname,
+                    lname: e.target.value,
+                    phone: data.create.phone,
+                    address: data.create.address
+                }
+            }
         });
     }
 
     handlePhone = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            phone: e.target.value
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: frontend.create.username,
+                    password: frontend.create.password,
+                    email: frontend.create.email,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: e.target.value,
+                    address: frontend.create.address
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: data.create.password,
+                    email: data.create.email,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: e.target.value,
+                    address: data.create.address
+                }
+            }
         });
     }
 
     handleAddress = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+        const { frontend, data } = this.state;
+
         this.setState({
-            address: e.target.value
+            frontend: {
+                login: frontend.login,
+                create: {
+                    username: frontend.create.username,
+                    password: frontend.create.password,
+                    email: frontend.create.email,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: frontend.create.phone,
+                    address: e.target.value
+                }
+            },
+            data: {
+                login: frontend.login,
+                create: {
+                    username: data.create.username,
+                    password: data.create.password,
+                    email: data.create.email,
+                    fname: frontend.create.fname,
+                    lname: frontend.create.lname,
+                    phone: data.create.phone,
+                    address: e.target.value
+                }
+            }
         });
     }
 
-    handleBirthdate = ( e:React.ChangeEvent<HTMLInputElement> ) => {
+    clearFrontendValues = () => {
         this.setState({
-            birthdate: e.target.value
+            frontend: {
+                login: {
+                    username: '',
+                    password: ''
+                },
+                create: {
+                    username: '',
+                    password: '',
+                    email: '',
+                    fname: '',
+                    lname: '',
+                    phone: '',
+                    address: ''
+                }
+            }
         });
     }
 
@@ -142,7 +384,8 @@ export default class Login extends Component {
     }
 
     showLogin = () => {
-        const { login_username, login_password, display } = this.state;
+        const { frontend, data } = this.state;
+        const { display } = this.state;
 
         if( display === 'login' ) {
             return (
@@ -151,6 +394,7 @@ export default class Login extends Component {
                     action='./PHP/login.php'
                     target='login_iframe'
                     className='page'
+                    onSubmit={this.clearFrontendValues}
                 >
                     { this.toggleDisplay() }
                     <h3> Enter username & password: </h3>
@@ -159,8 +403,7 @@ export default class Login extends Component {
                         <label> Username: </label>
                         <input id='username'
                             type='text'
-                            name='login_username'
-                            value={ login_username }
+                            value={ frontend.login.username }
                             onChange={ this.handleUsername }
                             required
                         />
@@ -170,11 +413,34 @@ export default class Login extends Component {
                         <label> Password: </label>
                         <input id='password'
                             type='text'
-                            name='login_password'
-                            value={ login_password }
+                            value={ frontend.login.password }
                             onChange={ this.handlePassword }
                             required
                         />
+                    </fieldset>
+
+                    <fieldset style={{ display: 'none' }}>
+                        <fieldset>
+                            <label> Username: </label>
+                            <input id='username'
+                                type='text'
+                                name='username'
+                                value={ data.login.username }
+                                onChange={ this.handleUsername }
+                                required
+                            />
+                        </fieldset>
+        
+                        <fieldset>
+                            <label> Password: </label>
+                            <input id='password'
+                                type='text'
+                                name='password'
+                                value={ data.login.password }
+                                onChange={ this.handlePassword }
+                                required
+                            />
+                        </fieldset>
                     </fieldset>
     
                     <button 
@@ -190,7 +456,8 @@ export default class Login extends Component {
     }
 
     showRegisterAccount = () => {
-        const { username, password, email, fullname, phone, address, birthdate, display } = this.state;
+        const { frontend, data } = this.state;
+        const { display } = this.state;
 
         if( display === 'create' ) {
             return (
@@ -198,31 +465,102 @@ export default class Login extends Component {
                     id='user_info' 
                     className='page'
                     method='POST'
-                    action='./PHP/account.php'
-                    target='creation_iframe'
+                    action='./PHP/login.php'
+                    target='login_iframe'
                     style={{ gridTemplateColumns: '300px 300px' }}
-                    onSubmit={this.handleSubmit}
-                    >
-                        { this.toggleDisplay() }
-                        <h3> Create an account: </h3>
-    
+                    onSubmit={ this.clearFrontendValues }
+                >
+                    { this.toggleDisplay() }
+                    <h3> Create an account: </h3>
+
+                    <fieldset>
+                        <label> Username: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.username }
+                            onChange={ this.handleNewUsername }
+                            required
+                        />
+                    </fieldset>
+                    
+                    <fieldset>
+                        <label> Password: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.password }
+                            onChange={ this.handleNewPassword }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <label> Email: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.email }
+                            onChange={ this.handleEmail }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <label> First Name: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.fname }
+                            onChange={ this.handleFName }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <label> Last Name: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.lname }
+                            onChange={ this.handleLName }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <label> Phone: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.phone }
+                            onChange={ this.handlePhone }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset>
+                        <label> Address: </label>
+                        <input 
+                            type='text'
+                            value={ frontend.create.address }
+                            onChange={ this.handleAddress }
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset style={{ display: 'none' }}>
                         <fieldset>
                             <label> Username: </label>
                             <input 
                                 type='text'
-                                name='username'
-                                value={ username }
+                                name='new_username'
+                                value={ data.create.username }
                                 onChange={ this.handleNewUsername }
                                 required
                             />
                         </fieldset>
-                        
+
                         <fieldset>
                             <label> Password: </label>
                             <input 
                                 type='text'
-                                name='password'
-                                value={ password }
+                                name='new_password'
+                                value={ data.create.password }
                                 onChange={ this.handleNewPassword }
                                 required
                             />
@@ -233,19 +571,30 @@ export default class Login extends Component {
                             <input 
                                 type='text'
                                 name='email'
-                                value={ email }
+                                value={ data.create.email }
                                 onChange={ this.handleEmail }
                                 required
                             />
                         </fieldset>
     
                         <fieldset>
-                            <label> Full Name: </label>
+                            <label> First Name: </label>
                             <input 
                                 type='text'
-                                name='fullname'
-                                value={ fullname }
-                                onChange={ this.handleName }
+                                name='fname'
+                                value={ data.create.fname }
+                                onChange={ this.handleFName }
+                                required
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> Last Name: </label>
+                            <input 
+                                type='text'
+                                name='lname'
+                                value={ data.create.lname }
+                                onChange={ this.handleLName }
                                 required
                             />
                         </fieldset>
@@ -255,7 +604,7 @@ export default class Login extends Component {
                             <input 
                                 type='text'
                                 name='phone'
-                                value={ phone }
+                                value={ data.create.phone }
                                 onChange={ this.handlePhone }
                                 required
                             />
@@ -266,31 +615,17 @@ export default class Login extends Component {
                             <input 
                                 type='text'
                                 name='address'
-                                value={ address }
+                                value={ data.create.address }
                                 onChange={ this.handleAddress }
                                 required
                             />
                         </fieldset>
-    
-                        <fieldset>
-                            <label> Birthday: </label>
-                            <input 
-                                type='text'
-                                name='birthdate'
-                                value={ birthdate }
-                                onChange={ this.handleBirthdate }
-                                required
-                            />
-                        </fieldset>
-    
-                        <fieldset className='button'>
-                            <button 
-                                type='submit'
-                                onClick={ this.handleSubmit }
-                                value='submit'
-                            > Submit </button>
-                        </fieldset>
-                    </form>
+                    </fieldset>
+
+                    <fieldset className='button'>
+                        <button type='submit' onClick={this.dataSearch}> Submit </button>
+                    </fieldset>
+                </form>
             );
         }
 

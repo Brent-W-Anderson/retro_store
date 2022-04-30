@@ -1,45 +1,49 @@
 
 <?php
-  // Resources used
-  // https://www.w3schools.com/php/php_mysql_connect.asp
+  include "../index.php";
 
-  //must create db in mysql named 'retro' for this to connect succesfully
-  if( $_SERVER['REQUEST_METHOD'] === 'POST') {
+  class Login {
+    // this trait has our database with the connection to MySQL
+    use MySQL_Connection;
 
-    // login info
-    $login = $_POST['login_username'];
-    $password = $_POST['login_password'];
+    public function checkCredentials() {
+      if( isset($_POST['username']) ) {
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
 
-    // Database interaction
-
-    //creates connection to db
-    @$db = new mysqli('localhost', 'root', '', 'retro');
-
-    // This is in place to catch if the connection fails, if it triggers it means it didnt connect.
-    if ( $db->connect_error ) {
-      die("connection failed: " .$db->connect_error);
-    };
-      
-    // Statements for interaction with the DB
-    //Query the db for the username and passowrd entered
-    $userCk = $db -> query("SELECT username, password FROM customer WHERE username =  '$login' AND password = '$password'");
-
-
-    // if no result comes back from db, throws error stating why
-    if(!$userCk) { echo mysqli_error($db);}
-
-    if ($userCk->num_rows > 0) {
-      // output data of username/password that was matched in database
-      while($row = $userCk->fetch_assoc()) {
-        echo '<pre id="login_data"> Welcome to RETRO-RETRO: ' . $row["username"]. "<br> Password: " .$row["password"]. "<br>";
-
+        echo '<script>console.warn("user: '.$user.' pass: '.$pass.'");</script>';
       }
-    } else {
-      echo "0 results";
+
+      if( isset($_POST['new_username']) ) {
+        $user = $_POST['new_username'];
+        $pass = $_POST['new_password'];
+
+        echo '<script>console.warn("new user: '.$user.' new pass: '.$pass.'");</script>';
+        MySQL_Connect::get() -> query("INSERT INTO users (user, pass) VALUES ('".$user."', '".$pass."')");
+      }
     }
 
-      // Closes the db
-      $db->close();
+    public function test() {
+      $conn = new mysqli('localhost', 'root', 'password', 'retro_db');
 
+      if( !$conn ) {
+        echo 'Database connection error: ' . mysqli_conntect_error();
+        echo '<script>console.warn("Database connection error: '.mysqli_connect_error().'");</script>';
+      }
+      else {
+        $result = MySQL_Connect::get() -> query("SELECT * FROM users");
+
+        while($row = $result->fetch_assoc()) {
+          echo '<script>console.warn("user: '.$row['user'].' pass: '.$row['pass'].'");</script>';
+        }
+      }
+    }
+  }
+
+  if( $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $loggedUser = new Login;
+    $loggedUser -> checkCredentials();
+
+    $loggedUser -> test();
   }
 ?> 
