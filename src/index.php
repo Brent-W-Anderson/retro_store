@@ -24,7 +24,8 @@
   trait MySQL_Connection {
     public $mysqli;
     public $dbs = [];
-    public $dbName = 'retro_db';
+    public $dbName = 'retro_db'; // use locally
+    // public $dbName = 'ics325sp2201'; // use on server
   }
 
   class MySQL_Connect {
@@ -43,7 +44,8 @@
 
     // connect to mysql
     public function connect_mysql() {
-      $this -> mysqli = mysqli_connect('localhost', 'root', 'password');
+      $this -> mysqli = mysqli_connect('localhost', 'root', 'password'); // use locally
+      // $this -> mysqli = mysqli_connect('localhost', 'ics325sp2201', '2224'); // use on server
 
       // connection failed
       if ( !$this -> mysqli ) {
@@ -62,7 +64,8 @@
       $this -> mysqli -> query("CREATE DATABASE IF NOT EXISTS ".$this -> dbName."");
 
       // connect
-      $conn = new mysqli('localhost', 'root', 'password', $this -> dbName);
+      $conn = new mysqli('localhost', 'root', 'password', $this -> dbName); // use locally
+      // $conn = new mysqli('localhost', 'ics325sp2201', '2224', $this -> dbName); // use on server
 
       if( !$conn ) {
         echo 'Database connection error: ' . mysqli_conntect_error();
@@ -77,10 +80,25 @@
     public function create_tables() {
       $this -> get() -> query(
         "CREATE TABLE users (
-          id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-          user VARCHAR(30) NOT NULL,
-          pass VARCHAR(30) NOT NULL
+          `id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+          `user` VARCHAR(30) NOT NULL,
+          `pass` VARCHAR(30) NOT NULL,
+          `email` VARCHAR(30),
+          `fname` VARCHAR(30),
+          `lname` VARCHAR(30),
+          `phone` VARCHAR(30),
+          `address` VARCHAR(30)
         )"
+      );
+    }
+
+    public function populate_database() {
+      // users
+      $this -> get() -> query(
+        "INSERT INTO users (`user`, `pass`, `email`, `fname`, `lname`, `phone`, `address`)
+        VALUES ('admin', 'pass', 'admin@email.com', 'brent', 'anderson', '123456789', '123 vine st.'),
+        ('admin0', 'pass0', 'admin0@email.com', 'luis', 'duran-enriquez', '987654321', '456 random ln.'),
+        ('admin1', 'pass1', 'admin1@email.com', 'nate', 'loomis', '123456789', '789 orange dr.')"
       );
     }
 
@@ -103,8 +121,14 @@
   $retro -> connect_mysql();
 
   if( $_SERVER['REQUEST_METHOD'] === 'GET') {
-    // $retro -> drop_database();
+    $retro -> drop_database();
   }
   
   $retro -> connect_database();
+
+  if( $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $retro -> populate_database();
+  }
+
+  include "./PHP/login.php";
 ?>

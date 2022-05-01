@@ -391,7 +391,7 @@ export default class Login extends Component {
             return (
                 <form
                     method='POST'
-                    action='./PHP/login.php'
+                    action='./index.php'
                     target='login_iframe'
                     className='page'
                     onSubmit={this.clearFrontendValues}
@@ -465,7 +465,7 @@ export default class Login extends Component {
                     id='user_info' 
                     className='page'
                     method='POST'
-                    action='./PHP/login.php'
+                    action='./index.php'
                     target='login_iframe'
                     style={{ gridTemplateColumns: '300px 300px' }}
                     onSubmit={ this.clearFrontendValues }
