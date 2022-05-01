@@ -3,9 +3,12 @@ import { Component } from 'react';
 import { Menu, MenuOpen, HomeOutlined, Search, Login, ManageAccountsOutlined, AddLink } from '@mui/icons-material';
 
 // the header needs to know which page it's on, so it knows which links to display.
-export default class Header extends Component<{ activePage:string, selectActivePage( selectedPage:string ):void, handleSidebar():void, sidebarOpen:boolean }> {
+export default class Header extends Component<{ activePage:string, selectActivePage( selectedPage:string ):void, handleSidebar():void, sidebarOpen:boolean, accountInfo: string[] }> {
   render() {
-    const { activePage, selectActivePage, handleSidebar, sidebarOpen } = this.props;
+    const { activePage, selectActivePage, handleSidebar, sidebarOpen, accountInfo } = this.props;
+
+    const loginClass = `link${accountInfo.length > 0 ? ' inactive' : '' }${ activePage === 'login' ? ' selected' : ''}`;
+    const accountClass = `link${accountInfo.length > 0 ? '' : ' inactive' }${ activePage === 'account' ? ' selected' : '' }`;
 
     return (
       <div id='header'>
@@ -62,15 +65,15 @@ export default class Header extends Component<{ activePage:string, selectActiveP
               </h2>
             </li>
 
-            <li className={`link${ activePage === 'login' ? ' selected' : ''}`}>
-              <h2 onClick={ () => selectActivePage( 'login' )}>
+            <li className={ loginClass }>
+              <h2 onClick={ () => { accountInfo.length > 0 ? null : selectActivePage( 'login' ) } }>
                 <Login />
                 <span> LOGIN </span>
               </h2>
             </li>
 
-            <li className={`link inactive${ activePage === 'account' ? ' selected' : '' }`}>
-              <h2 onClick={ () => selectActivePage( 'account' ) } >
+            <li className={ accountClass }>
+              <h2 onClick={ () => { accountInfo.length > 0 ? selectActivePage( 'account' ) : null } } >
                 <ManageAccountsOutlined/>
                 <span> ACCOUNT </span>
               </h2>

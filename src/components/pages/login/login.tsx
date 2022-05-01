@@ -2,7 +2,7 @@
 import React from 'react';
 import { Component } from 'react';
 
-export default class Login extends Component { 
+export default class Login extends Component<{ setAccountInfo: Function, selectActivePage: Function }> { 
     state = {
         display: 'login',
         frontend: {
@@ -41,32 +41,22 @@ export default class Login extends Component {
 
     // for login part
     checkData = () => {
+        const { setAccountInfo, selectActivePage } = this.props;
         const loginData = this.iframeData.current?.contentWindow?.document.getElementById( 'login_data' );
     
         if( loginData?.textContent && loginData.textContent !== '' ) {
-           const txt = loginData.textContent; // convert to plain text to get rid of the crappy html that got carried over.
-           const txtString = String( txt ); // convert back to a normal string without the bs.
-           let txtJson;
-    
-           try {
-             txtJson = JSON.parse( txtString ); // break it into JSON.
-           }
-           catch( e ) {
-             console.error( 'error fetching data from DOM: ' + e );
+           const txt = loginData.textContent;
 
-             return true;
+           let userData = txt.split(",").map( item => {
+            return item.trim();
+           } );
+
+           if( userData.length > 0 ) {
+                setAccountInfo( userData );
+                selectActivePage( 'account' );
            }
     
-           if( txtJson.results ) {
-
-                console.warn( txt ); // this is the data coming back from login.php
-                this.setState({
-                    account: txtJson.results
-                });
-
-                console.warn( txtJson );  // data being echo'd back (this will be in the iframe)
-                return true;
-           }
+           return true;
         }
     
         return false;
@@ -637,7 +627,6 @@ export default class Login extends Component {
             <div id='login_create'>
                 { this.showRegisterAccount() }
                 { this.showLogin() }
-                <div className ='account_info'> { /* fill this with output formatting with data from php file */ } </div>
                 <iframe ref={ this.iframeData } name='login_iframe' style={{ display: 'none' }} />
             </div>
         );

@@ -29,7 +29,7 @@ export default class App extends Component {
     offsetY: 0,
     scrolling: false,
     sidebarOpen: false,
-    accountInfo: null
+    accountInfo: []
   }
 
   componentDidMount = () => {
@@ -103,8 +103,27 @@ export default class App extends Component {
     });
   }
 
+  setAccountInfo = ( userData:[] ) => {
+    this.setState({
+      accountInfo: userData
+    });
+  }
+
+  resetSearchPage = () => {
+    this.setState({
+      searchPage: {
+        games: {
+          count: 0,
+          results: []
+        },
+        searchVal: '',
+        pageNum: 1
+      }
+    });
+  }
+
   render() {
-    const { activePage, offsetY, scrolling, sidebarOpen, searchPage } = this.state;
+    const { activePage, offsetY, scrolling, sidebarOpen, searchPage, accountInfo } = this.state;
 
     return (
       <div className='app'>
@@ -113,20 +132,27 @@ export default class App extends Component {
           selectActivePage={ this.selectActivePage }
           handleSidebar={ this.handleSidebar }
           sidebarOpen={ sidebarOpen }
+          accountInfo={ accountInfo }
         />
 
         <div className='pages' onScroll={ this.handleScrollOffset }>
-          { activePage === 'home' ? <HomePage /> : null }
+          { activePage === 'home' ? <HomePage /> : '' }
           { activePage === 'search' ? 
             <SearchPage
               searchPage={ searchPage }
               updateSearchVal={ this.updateSearchVal }
               makeSearch={ this.makeSearch }
               offsetY={ offsetY }
-              scrolling={ scrolling } /> : null }
-          { activePage === 'login' ? <Login /> : null}
-          { activePage === 'account' ? <Account/> : null}
-          { activePage === 'forum' ? <Forum/> : null}
+              scrolling={ scrolling } /> : '' }
+          { activePage === 'login' ? <Login setAccountInfo={ this.setAccountInfo } selectActivePage={ this.selectActivePage } /> : '' }
+          { activePage === 'account' ? 
+            <Account 
+              accountInfo={ accountInfo } 
+              setAccountInfo={ this.setAccountInfo } 
+              selectActivePage={ this.selectActivePage } 
+              resetSearchPage={ this.resetSearchPage }
+            /> : '' }
+          { activePage === 'forum' ? <Forum/> : '' }
         </div>
       </div>
     );

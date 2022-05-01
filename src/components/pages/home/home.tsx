@@ -62,7 +62,7 @@ export default class HomePage extends Component {
         </div>
 
         <div className='click-container'>
-          <div className='box' ><a href='link'>On Sale</a></div>
+          <div className='box' >On Sale</div>
           <div className='box' >Featured Page</div>
           <div className='box' >Xbox</div>
           <div className='box' >Playstation</div>

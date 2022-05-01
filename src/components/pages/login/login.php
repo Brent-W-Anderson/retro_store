@@ -35,7 +35,7 @@
 
       while( $row = $result->fetch_assoc() ) {
         if( $this -> username === $row['user'] && $this -> password === $row['pass'] ) {
-          echo '<script>console.warn("Welcome: '.$row['fname'].' '.$row['lname'].'");</script>';
+          echo '<pre id="login_data">'.$row['user'].', '.$row['pass'].', '.$row['email'].', '.$row['fname'].', '.$row['lname'].', '.$row['phone'].', '.$row['address'].'</pre>';
         }
       }  
     }

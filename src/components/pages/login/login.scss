@@ -10,85 +10,85 @@
 
 #login_create { // login specific styles here..
     padding-top: 40px;
+}
 
-    form {
-        display: grid; // display as grid so we can split apart the fieldsets.
-        width: fit-content;
-        justify-content: center; // this centers all of the columns in the form, even though there's space left and right.
-        overflow: hidden;
-        background: $color_white;
-        grid-template-columns: 300px; // define how many columns and how big here.
-        box-shadow: 0 4px 16px $color_black;
-        border-radius: 10px;
-        padding-top: 70px;
+#login_create form, #account form {
+    display: grid; // display as grid so we can split apart the fieldsets.
+    width: fit-content;
+    justify-content: center; // this centers all of the columns in the form, even though there's space left and right.
+    overflow: hidden;
+    background: $color_white;
+    grid-template-columns: 300px; // define how many columns and how big here.
+    box-shadow: 0 4px 16px $color_black;
+    border-radius: 10px;
+    padding-top: 70px;
 
-        .toggle_display {
-            position: absolute;
-            user-select: none;
+    .toggle_display {
+        position: absolute;
+        user-select: none;
 
-            li {
+        li {
+            cursor: pointer;
+            float: left;
+            list-style: none;
+            text-shadow: none;
+            background: $color_black;
+            color: $color_white;
+            padding: 5px 10px;
+
+            &.selected {
+                cursor: default;
+                background: $color_white;
+                color: $color_black;
+            }
+        }
+    }
+
+    h3 {
+        position: absolute;
+        box-sizing: border-box;
+        text-shadow: none;
+        text-align: left;
+        top: 40px;
+        width: 100%;
+        font-size: 1.2rem;
+        padding-bottom: 10px;
+        padding-left: 34px;
+        color: $color_black;
+    }
+
+    fieldset {
+        display: grid; // display as grid to put labels above inputs (get rid of this if you want it inline)
+        border: none;
+
+        label {
+            color: $color_black;
+        }
+
+        &.button {
+            justify-content: end;
+            
+            button {
                 cursor: pointer;
-                float: left;
-                list-style: none;
-                text-shadow: none;
+                width: fit-content;
+                border: 1px solid transparent;
+                font-weight: bold;
+                padding: 0 10px;
+                letter-spacing: 1px;
+                border-radius: 5px;
                 background: $color_black;
                 color: $color_white;
-                padding: 5px 10px;
 
-                &.selected {
-                    cursor: default;
+                &:active {
+                    border: 1px solid $color_black;
                     background: $color_white;
                     color: $color_black;
                 }
             }
         }
 
-        h3 {
-            position: absolute;
-            box-sizing: border-box;
-            text-shadow: none;
-            text-align: left;
-            top: 40px;
-            width: 100%;
-            font-size: 1.2rem;
-            padding-bottom: 10px;
-            padding-left: 34px;
+        p {
             color: $color_black;
         }
-
-        fieldset {
-            display: grid; // display as grid to put labels above inputs (get rid of this if you want it inline)
-            border: none;
-    
-            label {
-                color: $color_black;
-            }
-
-            &.button {
-                justify-content: end;
-                
-                button {
-                    cursor: pointer;
-                    width: fit-content;
-                    border: 1px solid transparent;
-                    font-weight: bold;
-                    padding: 0 10px;
-                    letter-spacing: 1px;
-                    border-radius: 5px;
-                    background: $color_black;
-                    color: $color_white;
-    
-                    &:active {
-                        border: 1px solid $color_black;
-                        background: $color_white;
-                        color: $color_black;
-                    }
-                }
-            }
-    
-            p {
-                color: $color_black;
-            }
-            }
     }
 }
