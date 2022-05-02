@@ -1,7 +1,7 @@
 
 import { Component } from 'react';
 
-export default class Account extends Component<{ accountInfo:string[], setAccountInfo:Function, selectActivePage:Function, resetSearchPage:Function }> {
+export default class Account extends Component<{ accountInfo:string[] }> {
     state = {
         user: '',
         pass: '',
@@ -47,34 +47,28 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
             }
         } );
     }
-
-    signOut = () => {
-        const { setAccountInfo, selectActivePage, resetSearchPage } = this.props;
-
-        setAccountInfo( [] ); // wipe accountInfo
-        selectActivePage( 'home' ); // bring back home after logging out
-        resetSearchPage(); // reset search values for the next user
-    }
     
     render() {
         const { user, pass, email, fname, lname, phone, address } = this.state;
 
         return (
             <div id="account" className="page">
-                <button type="button" onClick={ this.signOut }>Sign Out</button>
-
                 <h3>
                     Hello { fname } { lname }, welcome to Retro-Retro!
                 </h3>
 
-                <form>
+                <form
+                    method='POST'
+                    action='./index.php'
+                    target='account_iframe'
+                >
                     <h3> Account Info: </h3>
 
+                    {/* PRESENTATION DATA */}
                     <fieldset>
                         <label> Password: </label>
                         <input 
                             type='text'
-                            name='new_password'
                             placeholder={ pass }
                         />
                     </fieldset>
@@ -83,7 +77,6 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
                         <label> Username: </label>
                         <input 
                             type='text'
-                            name='new_username'
                             placeholder={ user }
                         />
                     </fieldset>
@@ -92,7 +85,6 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
                         <label> Last Name: </label>
                         <input 
                             type='text'
-                            name='lname'
                             placeholder={ lname }
                         />
                     </fieldset>
@@ -101,7 +93,6 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
                         <label> First Name: </label>
                         <input 
                             type='text'
-                            name='fname'
                             placeholder={ fname }
                         />
                     </fieldset>
@@ -110,7 +101,6 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
                         <label> Phone: </label>
                         <input 
                             type='text'
-                            name='phone'
                             placeholder={ phone }
                         />
                     </fieldset>
@@ -119,7 +109,6 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
                         <label> Email: </label>
                         <input 
                             type='text'
-                            name='email'
                             placeholder={ email }
                         />
                     </fieldset>
@@ -128,11 +117,82 @@ export default class Account extends Component<{ accountInfo:string[], setAccoun
                         <label> Address: </label>
                         <input 
                             type='text'
-                            name='address'
                             placeholder={ address }
                         />
                     </fieldset>
+
+                    {/* DATA FOR BACKEND */}
+                    <fieldset style={{ display: 'none' }}>
+                        <fieldset>
+                            <label> Password: </label>
+                            <input 
+                                type='text'
+                                name='update_password'
+                                defaultValue={ pass }
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> Username: </label>
+                            <input 
+                                type='text'
+                                name='update_username'
+                                defaultValue={ user }
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> Last Name: </label>
+                            <input 
+                                type='text'
+                                name='update_lname'
+                                defaultValue={ lname }
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> First Name: </label>
+                            <input 
+                                type='text'
+                                name='update_fname'
+                                defaultValue={ fname }
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> Phone: </label>
+                            <input 
+                                type='text'
+                                name='update_phone'
+                                defaultValue={ phone }
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> Email: </label>
+                            <input 
+                                type='text'
+                                name='update_email'
+                                defaultValue={ email }
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label> Address: </label>
+                            <input 
+                                type='text'
+                                name='update_address'
+                                defaultValue={ address }
+                            />
+                        </fieldset>
+                    </fieldset>
+
+                    <fieldset className='button'>
+                        <button type='submit'> Update </button>
+                    </fieldset>
                 </form>
+
+                <iframe name='account_iframe' style={{ display: 'none' }} />
             </div>
         );
     }

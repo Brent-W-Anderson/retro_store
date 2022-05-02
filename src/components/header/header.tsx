@@ -2,12 +2,30 @@
 import { Component } from 'react';
 import { Menu, MenuOpen, HomeOutlined, Search, Login, ManageAccountsOutlined, AddLink } from '@mui/icons-material';
 
+interface HeaderProps {
+  activePage:string,
+  selectActivePage( selectedPage:string ):void,
+  handleSidebar():void,
+  setAccountInfo:Function,
+  resetSearchPage:Function,
+  sidebarOpen:boolean,
+  accountInfo: string[]
+}
+
 // the header needs to know which page it's on, so it knows which links to display.
-export default class Header extends Component<{ activePage:string, selectActivePage( selectedPage:string ):void, handleSidebar():void, sidebarOpen:boolean, accountInfo: string[] }> {
+export default class Header extends Component<HeaderProps> {
+  logout = () => {
+    const { setAccountInfo, selectActivePage, resetSearchPage } = this.props;
+
+    setAccountInfo( [] );
+    selectActivePage( 'login' ); // bring back to login after logging out
+    resetSearchPage(); // reset search values for the next user
+  }
+
   render() {
     const { activePage, selectActivePage, handleSidebar, sidebarOpen, accountInfo } = this.props;
 
-    const loginClass = `link${accountInfo.length > 0 ? ' inactive' : '' }${ activePage === 'login' ? ' selected' : ''}`;
+    const loginClass = `link${ activePage === 'login' ? ' selected' : ''}`;
     const accountClass = `link${accountInfo.length > 0 ? '' : ' inactive' }${ activePage === 'account' ? ' selected' : '' }`;
 
     return (
@@ -66,9 +84,9 @@ export default class Header extends Component<{ activePage:string, selectActiveP
             </li>
 
             <li className={ loginClass }>
-              <h2 onClick={ () => { accountInfo.length > 0 ? null : selectActivePage( 'login' ) } }>
-                <Login />
-                <span> LOGIN </span>
+              <h2 onClick={ () => { accountInfo.length > 0 ? this.logout() : selectActivePage( 'login' ) } }>
+                { accountInfo.length > 0 ? <div className='logout'><Login /></div> : <Login /> }
+                { accountInfo.length > 0 ? <span> LOGOUT </span> : <span> LOGIN </span> }
               </h2>
             </li>
 

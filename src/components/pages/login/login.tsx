@@ -63,13 +63,9 @@ export default class Login extends Component<{ setAccountInfo: Function, selectA
     }
 
     dataSearch = () => {
-        const { username, password } = this.state.data.login;
-
-        if( username !== '' && password !== '' ) {
-            const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
-                if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
-            }, 250 );
-        }
+        const dataSearch = setInterval( () => { // keep checking the DOM every .25s until we have our data
+            if( this.checkData() ) clearInterval( dataSearch ); // if we receive some data, stop checking for data
+        }, 250 );
     }
 
     handleUsername = ( e:React.ChangeEvent<HTMLInputElement> ) => {
@@ -374,8 +370,7 @@ export default class Login extends Component<{ setAccountInfo: Function, selectA
     }
 
     showLogin = () => {
-        const { frontend, data } = this.state;
-        const { display } = this.state;
+        const { frontend, data, display } = this.state;
 
         if( display === 'login' ) {
             return (
@@ -384,7 +379,7 @@ export default class Login extends Component<{ setAccountInfo: Function, selectA
                     action='./index.php'
                     target='login_iframe'
                     className='page'
-                    onSubmit={this.clearFrontendValues}
+                    onSubmit={ this.clearFrontendValues }
                 >
                     { this.toggleDisplay() }
                     <h3> Enter username & password: </h3>
@@ -446,8 +441,7 @@ export default class Login extends Component<{ setAccountInfo: Function, selectA
     }
 
     showRegisterAccount = () => {
-        const { frontend, data } = this.state;
-        const { display } = this.state;
+        const { frontend, data, display } = this.state;
 
         if( display === 'create' ) {
             return (
@@ -458,7 +452,6 @@ export default class Login extends Component<{ setAccountInfo: Function, selectA
                     action='./index.php'
                     target='login_iframe'
                     style={{ gridTemplateColumns: '300px 300px' }}
-                    onSubmit={ this.clearFrontendValues }
                 >
                     { this.toggleDisplay() }
                     <h3> Create an account: </h3>

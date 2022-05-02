@@ -57,6 +57,14 @@
                 transform: scale( 0.96 );
             }
 
+            .logout {
+                display: contents;
+
+                svg {
+                    transform: rotateY(180deg);
+                }
+            }
+
             svg {
                 position: absolute;
                 bottom: 3px;

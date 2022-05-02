@@ -131,6 +131,8 @@ export default class App extends Component {
           activePage={ activePage } 
           selectActivePage={ this.selectActivePage }
           handleSidebar={ this.handleSidebar }
+          setAccountInfo={ this.setAccountInfo }
+          resetSearchPage={ this.resetSearchPage }
           sidebarOpen={ sidebarOpen }
           accountInfo={ accountInfo }
         />
@@ -148,9 +150,6 @@ export default class App extends Component {
           { activePage === 'account' ? 
             <Account 
               accountInfo={ accountInfo } 
-              setAccountInfo={ this.setAccountInfo } 
-              selectActivePage={ this.selectActivePage } 
-              resetSearchPage={ this.resetSearchPage }
             /> : '' }
           { activePage === 'forum' ? <Forum/> : '' }
         </div>

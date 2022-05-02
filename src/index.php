@@ -131,4 +131,5 @@
   }
 
   include "./PHP/login.php";
+  include "./PHP/account.php";
 ?>
